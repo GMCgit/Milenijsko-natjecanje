@@ -40,9 +40,9 @@ addEventListener("keyup", (e) => {
 function update() {
   mainChar.move();
   if (map[mainChar.y][mainChar.x] == "f") {
-    let randomEncounter = Math.random()
+    let randomEncounter = Math.random();
     if (randomEncounter < 0.03) {
-      console.log('boo!')
+      console.log("boo!");
     }
   }
 }
@@ -93,12 +93,12 @@ function draw() {
     posX = 0;
     for (let j = 0; j < countW; j += 1) {
       let yValue = mainChar.y - Math.ceil(countH / 2) + i;
-      if (yValue < 0) yValue=0;
-      if (yValue > 99) yValue=99;
+      if (yValue < 0) yValue = 0;
+      if (yValue > 99) yValue = 99;
 
       let xValue = mainChar.x - Math.ceil(countW / 2) + j;
-      if (xValue < 0) xValue=0;
-      if (xValue > 99) xValue=99;
+      if (xValue < 0) xValue = 0;
+      if (xValue > 99) xValue = 99;
 
       image(
         tiles[map[yValue][xValue]],
