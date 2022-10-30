@@ -10,9 +10,7 @@ let width = Math.min(
   800
 );
 const tileSize = 50;
-
-let tileCountW = width / tileSize + 1;
-let tileCountH = 400 / tileSize + 1;
+let countW, countH;
 
 let mainChar = new Player();
 main();
@@ -41,6 +39,12 @@ addEventListener("keyup", (e) => {
 });
 function update() {
   mainChar.move();
+  if (map[mainChar.y][mainChar.x] == "f") {
+    let randomEncounter = Math.random()
+    if (randomEncounter < 0.03) {
+      console.log('boo!')
+    }
+  }
 }
 function setup() {
   createCanvas(
@@ -61,39 +65,49 @@ function preload() {
   tiles["w"] = loadImage(
     "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/water.png"
   );
-  tiles["g"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/grass.png");
-  tiles["s"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/sacred.png");
-  tiles["p"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/path.png");
-  tiles["f"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/forest.png");
-  mainChar.idle = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/CharDesign/player.png");
+  tiles["g"] = loadImage(
+    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/grass.png"
+  );
+  tiles["s"] = loadImage(
+    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/sacred.png"
+  );
+  tiles["p"] = loadImage(
+    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/path.png"
+  );
+  tiles["f"] = loadImage(
+    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/forest.png"
+  );
+  mainChar.idle = loadImage(
+    "https://gmcgit.github.io/Milenijsko-natjecanje/CharDesign/player.png"
+  );
 }
 function draw() {
   background(220);
   let posX = 0;
   let posY = 0;
-  for (
-    let j = max(mainChar.y - tileCountH / 2, 0);
-    j < max(mainChar.y + tileCountH / 2, map.length);
-    j += 1
-  ) {
-    for (
-      let i = max(mainChar.x - tileCountW / 2, 0);
-      i < max(mainChar.x + tileCountW / 2, map[0].length);
-      i += 1
-    ) {
+
+  countW = (Math.ceil(width / 100) * 100) / tileSize + 1;
+  countH = (Math.ceil(height / 100) * 100) / tileSize + 1;
+
+  for (let i = 0; i < countH; i += 1) {
+    posX = 0;
+    for (let j = 0; j < countW; j += 1) {
+      let yValue = mainChar.y - Math.ceil(countH / 2) + i;
+      if (yValue < 0) yValue=0;
+      if (yValue > 99) yValue=99;
+
+      let xValue = mainChar.x - Math.ceil(countW / 2) + j;
+      if (xValue < 0) xValue=0;
+      if (xValue > 99) xValue=99;
+
       image(
-        tiles[map[Math.floor(j)][Math.floor(i)]],
+        tiles[map[yValue][xValue]],
         posX * tileSize - tileSize / 2,
         posY * tileSize - tileSize / 2
       );
       posX++;
     }
     posY++;
-    posX = 0;
   }
-  image(
-    mainChar.idle,
-    Math.floor(tileCountW / 2) * tileSize - tileSize / 2,
-    Math.floor(tileCountH / 2) * tileSize - tileSize / 2
-  );
+  image(mainChar.idle, (posX / 2) * tileSize, (posY / 2) * tileSize);
 }
