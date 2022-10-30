@@ -29,18 +29,18 @@ function main(currentTime) {
       0) - 50,
     800
   );
-  update()
+  update();
 }
 addEventListener("keydown", (e) => {
-  e.preventDefault()
+  e.preventDefault();
   keyMap[e.key] = true;
-})
+});
 addEventListener("keyup", (e) => {
-  e.preventDefault()
+  e.preventDefault();
   keyMap[e.key] = false;
-})
+});
 function update() {
-  mainChar.move()
+  mainChar.move();
 }
 function setup() {
   createCanvas(
@@ -58,17 +58,19 @@ function windowResized() {
   createCanvas(width, 400);
 }
 function preload() {
-  tiles["w"] = loadImage("./tiles/water.png");
-  tiles["g"] = loadImage("./tiles/grass.png");
-  tiles["s"] = loadImage("./tiles/sacred.png");
-  tiles["p"] = loadImage("./tiles/path.png");
-  tiles["f"] = loadImage("./tiles/forest.png");
-  mainChar.idle = loadImage("../CharDesign/player.png");
+  tiles["w"] = loadImage(
+    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/water.png"
+  );
+  tiles["g"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/grass.png");
+  tiles["s"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/sacred.png");
+  tiles["p"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/path.png");
+  tiles["f"] = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/tiles/forest.png");
+  mainChar.idle = loadImage("https://gmcgit.github.io/Milenijsko-natjecanje/CharDesign/player.png");
 }
 function draw() {
   background(220);
   let posX = 0;
-  let posY = 0
+  let posY = 0;
   for (
     let j = max(mainChar.y - tileCountH / 2, 0);
     j < max(mainChar.y + tileCountH / 2, map.length);
@@ -91,7 +93,7 @@ function draw() {
   }
   image(
     mainChar.idle,
-    Math.floor(tileCountW/2) * tileSize - tileSize / 2,
-    Math.floor(tileCountH/2) * tileSize - tileSize / 2
+    Math.floor(tileCountW / 2) * tileSize - tileSize / 2,
+    Math.floor(tileCountH / 2) * tileSize - tileSize / 2
   );
 }
