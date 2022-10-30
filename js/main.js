@@ -58,11 +58,11 @@ function windowResized() {
   createCanvas(width, 400);
 }
 function preload() {
-  tiles["w"] = loadImage("../tiles/water.png");
-  tiles["g"] = loadImage("../tiles/grass.png");
-  tiles["s"] = loadImage("../tiles/sacred.png");
-  tiles["p"] = loadImage("../tiles/path.png");
-  tiles["f"] = loadImage("../tiles/forest.png");
+  tiles["w"] = loadImage("./tiles/water.png");
+  tiles["g"] = loadImage("./tiles/grass.png");
+  tiles["s"] = loadImage("./tiles/sacred.png");
+  tiles["p"] = loadImage("./tiles/path.png");
+  tiles["f"] = loadImage("./tiles/forest.png");
   mainChar.idle = loadImage("../CharDesign/player.png");
 }
 function draw() {
