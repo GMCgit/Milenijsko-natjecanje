@@ -1,5 +1,6 @@
 let keyMap = [];
 let currentState = "map";
+let mul;
 
 class Player {
   constructor() {
@@ -9,33 +10,34 @@ class Player {
     this.y = 19;
   }
   move() {
+    mul = 5/FPS;
     if (currentState !== "map") return;
     if (keyMap["d"] == true) {
-      this.x += 1;
+      this.x += mul;
       if (this.x > 99) this.x = 99;
-      if (map[this.y][this.x] == "w") {
-        this.x -= 1;
+      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+        this.x -= mul;
       }
     }
     if (keyMap["a"] == true) {
-      this.x -= 1;
+      this.x -= mul;
       if (this.x < 0) this.x = 0;
-      if (map[this.y][this.x] == "w") {
-        this.x += 1;
+      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+        this.x += mul;
       }
     }
     if (keyMap["s"] == true) {
-      this.y += 1;
+      this.y += mul;
       if (this.y > 99) this.y = 99;
-      if (map[this.y][this.x] == "w") {
-        this.y -= 1;
+      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+        this.y -= mul;
       }
     }
     if (keyMap["w"] == true) {
-      this.y -= 1;
+      this.y -= mul;
       if (this.y < 0) this.y = 0;
-      if (map[this.y][this.x] == "w") {
-        this.y += 1;
+      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+        this.y += mul;
       }
     }
   }

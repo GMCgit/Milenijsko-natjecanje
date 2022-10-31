@@ -1,6 +1,6 @@
 let lastRenderTime = 0;
 let gameState = "map";
-const FPS = 10;
+const FPS = 100;
 let tiles = [];
 let width = Math.min(
   (window.innerWidth ||
@@ -39,7 +39,7 @@ addEventListener("keyup", (e) => {
 });
 function update() {
   mainChar.move();
-  if (map[mainChar.y][mainChar.x] == "f") {
+  if (map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "f") {
     let randomEncounter = Math.random();
     if (randomEncounter < 0.03) {
       console.log("boo!");
@@ -89,9 +89,9 @@ function draw() {
   countW = (Math.ceil(width / 100) * 100) / tileSize + 1;
   countH = (Math.ceil(height / 100) * 100) / tileSize + 1;
 
-  for (let i = 0; i < countH; i += 1) {
+  for (let i = 0; i < countH+10; i += 1) {
     posX = 0;
-    for (let j = 0; j < countW; j += 1) {
+    for (let j = 0; j < countW+10; j += 1) {
       let yValue = mainChar.y - Math.ceil(countH / 2) + i;
       if (yValue < 0) yValue = 0;
       if (yValue > 99) yValue = 99;
@@ -101,13 +101,13 @@ function draw() {
       if (xValue > 99) xValue = 99;
 
       image(
-        tiles[map[yValue][xValue]],
-        posX * tileSize - tileSize / 2,
-        posY * tileSize - tileSize / 2
+        tiles[map[Math.floor(yValue)][Math.floor(xValue)]],
+        posX * tileSize - (mainChar.x-Math.floor(mainChar.x))*tileSize,
+        posY * tileSize - (mainChar.y-Math.floor(mainChar.y))*tileSize
       );
       posX++;
     }
     posY++;
   }
-  image(mainChar.idle, (posX / 2) * tileSize, (posY / 2) * tileSize);
+  image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize-15);
 }
