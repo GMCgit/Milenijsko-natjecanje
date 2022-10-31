@@ -1,6 +1,7 @@
 let keyMap = [];
 let currentState = "map";
 let mul;
+let Border = ["w","s","f"];
 
 class Player {
   constructor() {
@@ -15,28 +16,28 @@ class Player {
     if (keyMap["d"] == true) {
       this.x += mul;
       if (this.x > 99) this.x = 99;
-      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+      if (Border.indexOf(map[Math.floor(this.y)][Math.floor(this.x)]) >= 0) {
         this.x -= mul;
       }
     }
     if (keyMap["a"] == true) {
       this.x -= mul;
       if (this.x < 0) this.x = 0;
-      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+      if (Border.indexOf(map[Math.floor(this.y)][Math.floor(this.x)]) >=0) {
         this.x += mul;
       }
     }
     if (keyMap["s"] == true) {
       this.y += mul;
       if (this.y > 99) this.y = 99;
-      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+      if (Border.indexOf(map[Math.floor(this.y)][Math.floor(this.x)]) >= 0) {
         this.y -= mul;
       }
     }
     if (keyMap["w"] == true) {
       this.y -= mul;
       if (this.y < 0) this.y = 0;
-      if (map[Math.floor(this.y)][Math.floor(this.x)] == "w") {
+      if (Border.indexOf(map[Math.floor(this.y)][Math.floor(this.x)]) >= 0) {
         this.y += mul;
       }
     }
