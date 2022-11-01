@@ -42,12 +42,12 @@ addEventListener("keyup", (e) => {
 });
 
 function update() {
-  lastX = Math.floor(mainChar.x); 
+  lastX = Math.floor(mainChar.x);
   lastY = Math.floor(mainChar.y);
-  mainChar.move();  
+  mainChar.move();
 
-  if(Math.floor(mainChar.x) != lastX || Math.floor(mainChar.y) != lastY){
-     tryEncounter()
+  if (Math.floor(mainChar.x) != lastX || Math.floor(mainChar.y) != lastY) {
+    tryEncounter();
   }
 }
 
@@ -63,9 +63,9 @@ function setup() {
     400
   );
 
-  for(let i = 0;i<107;i++){
+  for (let i = 0; i < 107; i++) {
     let arr = [];
-    for(let j = 0;j<107;j++){
+    for (let j = 0; j < 107; j++) {
       arr.push(0);
     }
     encCooldown.push(arr);
@@ -102,9 +102,9 @@ function draw() {
   countW = (Math.ceil(width / 100) * 100) / tileSize + 1;
   countH = (Math.ceil(height / 100) * 100) / tileSize + 1;
 
-  for (let i = 0; i < countH+10; i += 1) {
+  for (let i = 0; i < countH + 10; i += 1) {
     posX = 0;
-    for (let j = 0; j < countW+10; j += 1) {
+    for (let j = 0; j < countW + 10; j += 1) {
       let yValue = mainChar.y - Math.ceil(countH / 2) + i;
       if (yValue < 0) yValue = 0;
       if (yValue > 99) yValue = 99;
@@ -115,37 +115,47 @@ function draw() {
 
       image(
         tiles[map[Math.floor(yValue)][Math.floor(xValue)]],
-        posX * tileSize - (mainChar.x-Math.floor(mainChar.x))*tileSize,
-        posY * tileSize - (mainChar.y-Math.floor(mainChar.y))*tileSize
+        posX * tileSize - (mainChar.x - Math.floor(mainChar.x)) * tileSize,
+        posY * tileSize - (mainChar.y - Math.floor(mainChar.y)) * tileSize
       );
       posX++;
     }
     posY++;
   }
-  image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize-15);
-}  
+  image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize - 15);
+}
 
-function tryEncounter(){
+function tryEncounter() {
   //moguca dodatna optimizacija ako pamtim je li player bio na tileu prije x s
 
   //treba jos dodati da se encounter nemoze dogoditi dok drugi traje
-  let encRadius = 3;
-  let encProb = 0.025;
-  let encCooldownReset = 5000; //ms
+  const encRadius = 3;
+  const encProb = 0.025;
+  const encCooldownReset = 5000; //ms
 
-  for(let i = -encRadius; i<=encRadius; i++){
-    for(let j = -encRadius;j<=encRadius;j++){
-        if(Math.abs(i)+Math.abs(j)>encRadius) continue; //circle shaped radius
+  for (let i = -encRadius; i <= encRadius; i++) {
+    for (let j = -encRadius; j <= encRadius; j++) {
+      if (Math.abs(i) + Math.abs(j) > encRadius) continue; //diamond shaped radius
 
-        if (map[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] == "f" && 
-            encCooldown[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] < lastRenderTime) {
+      let yValue = i + Math.floor(mainChar.y);
+      if (yValue < 0) yValue = 0;
+      if (yValue > 99) yValue = 99;
 
-              let randomEncounter = Math.random();
-              if (randomEncounter < encProb) {
-                console.log("boo!");
-                map[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] = "p"; //temporary
-              }
-              encCooldown[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] = lastRenderTime+encCooldownReset;
+      let xValue = j + Math.floor(mainChar.x);
+      if (xValue < 0) xValue = 0;
+      if (xValue > 99) xValue = 99;
+
+      if (
+        map[yValue][xValue] == "f" &&
+        encCooldown[yValue][xValue] < lastRenderTime
+      ) {
+        let randomEncounter = Math.random();
+        if (randomEncounter < encProb) {
+          console.log("boo!");
+          map[yValue][xValue] = "p"; //temporary
+        }
+        encCooldown[yValue][xValue] =
+          lastRenderTime + encCooldownReset;
       }
     }
   }
