@@ -12,6 +12,9 @@ let width = Math.min(
 const tileSize = 50;
 let countW, countH;
 
+let encCooldown = [];
+let lastX, lastY;
+
 let mainChar = new Player();
 main();
 
@@ -37,15 +40,17 @@ addEventListener("keyup", (e) => {
   e.preventDefault();
   keyMap[e.key] = false;
 });
+
 function update() {
-  mainChar.move();
-  if (map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "f") {
-    let randomEncounter = Math.random();
-    if (randomEncounter < 0.03) {
-      console.log("boo!");
-    }
+  lastX = Math.floor(mainChar.x); 
+  lastY = Math.floor(mainChar.y);
+  mainChar.move();  
+
+  if(Math.floor(mainChar.x) != lastX || Math.floor(mainChar.y) != lastY){
+     tryEncounter()
   }
 }
+
 function setup() {
   createCanvas(
     Math.min(
@@ -57,6 +62,14 @@ function setup() {
     ),
     400
   );
+
+  for(let i = 0;i<107;i++){
+    let arr = [];
+    for(let j = 0;j<107;j++){
+      arr.push(0);
+    }
+    encCooldown.push(arr);
+  }
 }
 function windowResized() {
   createCanvas(width, 400);
@@ -110,4 +123,30 @@ function draw() {
     posY++;
   }
   image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize-15);
+}  
+
+function tryEncounter(){
+  //moguca dodatna optimizacija ako pamtim je li player bio na tileu prije x s
+
+  //treba jos dodati da se encounter nemoze dogoditi dok drugi traje
+  let encRadius = 3;
+  let encProb = 0.025;
+  let encCooldownReset = 5000; //ms
+
+  for(let i = -encRadius; i<=encRadius; i++){
+    for(let j = -encRadius;j<=encRadius;j++){
+        if(Math.abs(i)+Math.abs(j)>encRadius) continue; //circle shaped radius
+
+        if (map[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] == "f" && 
+            encCooldown[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] < lastRenderTime) {
+
+              let randomEncounter = Math.random();
+              if (randomEncounter < encProb) {
+                console.log("boo!");
+                map[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] = "p"; //temporary
+              }
+              encCooldown[i+Math.floor(mainChar.y)][j+Math.floor(mainChar.x)] = lastRenderTime+encCooldownReset;
+      }
+    }
+  }
 }
