@@ -1,3 +1,4 @@
+//important constants for the game
 let lastRenderTime = 0;
 let gameState = "map";
 const FPS = 100;
@@ -18,6 +19,7 @@ let lastX, lastY;
 let mainChar = new Player();
 main();
 
+//recursive function to run the game on limited fps
 function main(currentTime) {
   window.requestAnimationFrame(main);
   const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
@@ -32,6 +34,8 @@ function main(currentTime) {
   );
   update();
 }
+
+//Movement register
 addEventListener("keydown", (e) => {
   e.preventDefault();
   keyMap[e.key] = true;
@@ -40,6 +44,65 @@ addEventListener("keyup", (e) => {
   e.preventDefault();
   keyMap[e.key] = false;
 });
+
+//mobile support
+document.addEventListener("touchstart", handleTouchStart, false);
+document.addEventListener("touchmove", handleTouchMove, false);
+document.addEventListener("touchend", handleTouchEnd, false);
+
+let touchPosition0 = {
+  x: 0,
+  y: 0,
+};
+let touchPosition1 = {
+  x: 0,
+  y: 0,
+};
+
+function handleTouchStart(e) {
+  touchPosition0.x = e.changedTouches[0].pageX;
+  touchPosition0.y = e.changedTouches[0].pageY;
+  var canvasPosition = canvas.getBoundingClientRect();
+}
+
+function handleTouchMove(e) {
+  touchPosition1.x = e.changedTouches[0].pageX;
+  touchPosition1.y = e.changedTouches[0].pageY;
+  let xDiff = touchPosition1.x - touchPosition0.x;
+  let yDiff = touchPosition1.y - touchPosition0.y;
+  if (xDiff > 10) {
+    keyMap["d"] = true;
+    keyMap["a"] = false;
+  }
+  if (xDiff < -10) {
+    keyMap["a"] = true;
+    keyMap["d"] = false;
+  }
+  if (yDiff < -10) {
+    keyMap["w"] = true;
+    keyMap["s"] = false;
+  }
+  if (yDiff > 10) {
+    keyMap["s"] = true;
+    keyMap["w"] = false;
+  }
+  if (Math.abs(xDiff) < 10) {
+    keyMap["a"] = false;
+    keyMap["d"] = false;
+  }
+  if (Math.abs(yDiff) < 10) {
+    keyMap["w"] = false;
+    keyMap["s"] = false;
+  }
+}
+
+function handleTouchEnd(e) {
+  e.preventDefault();
+  keyMap["a"] = false;
+  keyMap["s"] = false;
+  keyMap["d"] = false;
+  keyMap["w"] = false;
+}
 
 function update() {
   lastX = Math.floor(mainChar.x);
@@ -154,8 +217,7 @@ function tryEncounter() {
           console.log("boo!");
           map[yValue][xValue] = "p"; //temporary
         }
-        encCooldown[yValue][xValue] =
-          lastRenderTime + encCooldownReset;
+        encCooldown[yValue][xValue] = lastRenderTime + encCooldownReset;
       }
     }
   }

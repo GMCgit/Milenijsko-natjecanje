@@ -1,6 +1,7 @@
 let keyMap = [];
 let currentState = "map";
 let mul;
+//Border is non walkable areas
 let Border = ["w","s","f"];
 
 class Player {
@@ -11,6 +12,7 @@ class Player {
     this.y = 19;
   }
   move() {
+    //used for smooth moving, Math.floor keeps true this.x, this.y
     mul = 5/FPS;
     if (currentState !== "map") return;
     if (keyMap["d"] == true) {
