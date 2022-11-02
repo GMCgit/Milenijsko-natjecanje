@@ -7,8 +7,15 @@ let width = Math.min(
   (window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth ||
-    0) - 50,
+    0) - 20,
   800
+);
+let height = Math.min(
+  (window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight ||
+    0) - 20,
+  400
 );
 const tileSize = 50;
 let countW, countH;
@@ -29,8 +36,15 @@ function main(currentTime) {
     (window.innerWidth ||
       document.documentElement.clientWidth ||
       document.body.clientWidth ||
-      0) - 50,
+      0) - 20,
     800
+  );
+  height = Math.min(
+    (window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight ||
+      0) - 20,
+    400
   );
   update();
 }
@@ -120,10 +134,16 @@ function setup() {
       (window.innerWidth ||
         document.documentElement.clientWidth ||
         document.body.clientWidth ||
-        0) - 50,
+        0) - 20,
       800
     ),
-    400
+    Math.min(
+      (window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight ||
+        0) - 20,
+      400
+    )
   );
 
   for (let i = 0; i < 107; i++) {
@@ -135,7 +155,7 @@ function setup() {
   }
 }
 function windowResized() {
-  createCanvas(width, 400);
+  createCanvas(width, height);
 }
 function preload() {
   tiles["w"] = loadImage(
