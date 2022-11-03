@@ -10207,3 +10207,11 @@ const map = [
     "f",
   ],
 ];
+
+for (let i = 0; i < 100; i++) {
+  for (let j = 0; j < 100; j++) {
+    if (map[i][j] == "f") {
+      map[i][j] += Math.floor(Math.random() * 3) + 1;
+    }
+  }
+}

@@ -2,7 +2,7 @@ let keyMap = [];
 let currentState = "map";
 let mul;
 //Border is non walkable areas
-let Border = ["w","s","f"];
+let Border = ["w","s","f1", "f2", "f3"];
 
 class Player {
   constructor() {

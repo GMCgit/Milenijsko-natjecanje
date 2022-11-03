@@ -160,16 +160,20 @@ function windowResized() {
 }
 function preload() {
   let k = "..";
-  k = "https://gmcgit.github.io/Milenijsko-natjecanje";
+  //k = "https://gmcgit.github.io/Milenijsko-natjecanje";
   tiles["w"] = loadImage(`${k}/tiles/water.png`);
   tiles["g"] = loadImage(`${k}/tiles/grass.png`);
   tiles["s"] = loadImage(`${k}/tiles/sacred.png`);
   tiles["p"] = loadImage(`${k}/tiles/path.png`);
-  tiles["f"] = loadImage(`${k}/tiles/forest.png`);
+  tiles["f1"] = loadImage(`${k}/tiles/forest1.png`);
+  tiles["f2"] = loadImage(`${k}/tiles/forest2.png`);
+  tiles["f3"] = loadImage(`${k}/tiles/forest3.png`);
   mainChar.idle = loadImage(`${k}/CharDesign/playerIdle.png`);
-  mainChar.moving.push(loadImage(`${k}/CharDesign/playerMove0000.png`));
-  mainChar.moving.push(loadImage(`${k}/CharDesign/playerMove0001.png`));
-  mainChar.moving.push(loadImage(`${k}/CharDesign/playerMove0002.png`));
+  mainChar.moving = [
+    loadImage(`${k}/CharDesign/playerMove0000.png`),
+    loadImage(`${k}/CharDesign/playerMove0001.png`),
+    loadImage(`${k}/CharDesign/playerMove0002.png`),
+  ];
 }
 function draw() {
   background(220);
