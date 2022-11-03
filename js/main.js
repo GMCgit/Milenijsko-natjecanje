@@ -160,7 +160,7 @@ function windowResized() {
 }
 function preload() {
   let k = "..";
-  //k = "https://gmcgit.github.io/Milenijsko-natjecanje";
+  k = "https://gmcgit.github.io/Milenijsko-natjecanje";
   tiles["w"] = loadImage(`${k}/tiles/water.png`);
   tiles["g"] = loadImage(`${k}/tiles/grass.png`);
   tiles["s"] = loadImage(`${k}/tiles/sacred.png`);
