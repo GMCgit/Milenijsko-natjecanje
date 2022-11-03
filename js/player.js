@@ -7,9 +7,10 @@ let Border = ["w","s","f"];
 class Player {
   constructor() {
     this.idle = new Image();
-    this.idle.src = "../CharDesign/player.png";
     this.x = 12;
     this.y = 19;
+    this.idle = "";
+    this.moving = [];
   }
   move() {
     //used for smooth moving, Math.floor keeps true this.x, this.y

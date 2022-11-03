@@ -19,6 +19,7 @@ let height = Math.min(
 );
 const tileSize = 50;
 let countW, countH;
+let currentFrameMove = 0;
 
 let encCooldown = [];
 let lastX, lastY;
@@ -158,24 +159,17 @@ function windowResized() {
   createCanvas(width, height);
 }
 function preload() {
-  tiles["w"] = loadImage(
-    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/water.png"
-  );
-  tiles["g"] = loadImage(
-    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/grass.png"
-  );
-  tiles["s"] = loadImage(
-    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/sacred.png"
-  );
-  tiles["p"] = loadImage(
-    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/path.png"
-  );
-  tiles["f"] = loadImage(
-    "https://gmcgit.github.io/Milenijsko-natjecanje/tiles/forest.png"
-  );
-  mainChar.idle = loadImage(
-    "https://gmcgit.github.io/Milenijsko-natjecanje/CharDesign/player.png"
-  );
+  let k = "..";
+  //let k = https://gmcgit.github.io/Milenijsko-natjecanje
+  tiles["w"] = loadImage(`${k}/tiles/water.png`);
+  tiles["g"] = loadImage(`${k}/tiles/grass.png`);
+  tiles["s"] = loadImage(`${k}/tiles/sacred.png`);
+  tiles["p"] = loadImage(`${k}/tiles/path.png`);
+  tiles["f"] = loadImage(`${k}/tiles/forest.png`);
+  mainChar.idle = loadImage(`${k}/CharDesign/playerIdle.png`);
+  mainChar.moving.push(loadImage(`${k}/CharDesign/playerMove0000.png`));
+  mainChar.moving.push(loadImage(`${k}/CharDesign/playerMove0001.png`));
+  mainChar.moving.push(loadImage(`${k}/CharDesign/playerMove0002.png`));
 }
 function draw() {
   background(220);
@@ -205,7 +199,27 @@ function draw() {
     }
     posY++;
   }
-  image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize - 15);
+  if (keyMap["d"] || keyMap["s"] || keyMap["a"] || keyMap["w"]) {
+    if (keyMap["a"]) {
+      push();
+      scale(-1, 1);
+      image(
+        mainChar.moving[Math.floor(currentFrameMove / 30) % 3],
+        (countW / 2) * tileSize * -1 - tileSize,
+        (countH / 2) * tileSize - 15
+      );
+      pop();
+    } else {
+      image(
+        mainChar.moving[Math.floor(currentFrameMove / 30) % 3],
+        (countW / 2) * tileSize,
+        (countH / 2) * tileSize - 15
+      );
+    }
+  } else {
+    image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize - 15);
+  }
+  currentFrameMove++;
 }
 
 function tryEncounter() {
