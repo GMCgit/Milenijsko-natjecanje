@@ -10215,3 +10215,37 @@ for (let i = 0; i < 100; i++) {
     }
   }
 }
+let width = Math.min(
+  (window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth ||
+    0) - 20,
+  800
+);
+let height = Math.min(
+  (window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight ||
+    0) - 20,
+  400
+);
+
+let tiles = [];
+function preload() {
+  tiles["w"] = loadImage(`${loadPrefix}/tiles/water.png`);
+  tiles["g"] = loadImage(`${loadPrefix}/tiles/grass.png`);
+  tiles["s"] = loadImage(`${loadPrefix}/tiles/sacred.png`);
+  tiles["p"] = loadImage(`${loadPrefix}/tiles/path.png`);
+  tiles["f1"] = loadImage(`${loadPrefix}/tiles/forest1.png`);
+  tiles["f2"] = loadImage(`${loadPrefix}/tiles/forest2.png`);
+  tiles["f3"] = loadImage(`${loadPrefix}/tiles/forest3.png`);
+  mainChar.idle = loadImage(`${loadPrefix}/CharDesign/playerIdle.png`);
+  mainChar.moving = [
+    loadImage(`${loadPrefix}/CharDesign/playerMove0000.png`),
+    loadImage(`${loadPrefix}/CharDesign/playerMove0001.png`),
+    loadImage(`${loadPrefix}/CharDesign/playerMove0002.png`),
+  ];
+  tiles["bg"] = loadImage(`${loadPrefix}/tiles/background.png`);
+  tiles["enemy"] = loadImage(`${loadPrefix}/CharDesign/enemy.png`);
+  tiles["heart"] = loadImage(`${loadPrefix}/tiles/heart.png`);
+}

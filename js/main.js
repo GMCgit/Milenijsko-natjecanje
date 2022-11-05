@@ -2,21 +2,7 @@
 let lastRenderTime = 0;
 let gameState = "map";
 const FPS = 100;
-let tiles = [];
-let width = Math.min(
-  (window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth ||
-    0) - 20,
-  800
-);
-let height = Math.min(
-  (window.innerHeight ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight ||
-    0) - 20,
-  400
-);
+
 const tileSize = 50;
 let countW, countH;
 let currentFrameMove = 0;
@@ -24,7 +10,6 @@ let currentFrameMove = 0;
 let encCooldown = [];
 let lastX, lastY;
 
-let mainChar = new Player();
 main();
 
 //recursive function to run the game on limited fps
@@ -158,23 +143,7 @@ function setup() {
 function windowResized() {
   createCanvas(width, height);
 }
-function preload() {
-  let k = "..";
-  k = "https://gmcgit.github.io/Milenijsko-natjecanje";
-  tiles["w"] = loadImage(`${k}/tiles/water.png`);
-  tiles["g"] = loadImage(`${k}/tiles/grass.png`);
-  tiles["s"] = loadImage(`${k}/tiles/sacred.png`);
-  tiles["p"] = loadImage(`${k}/tiles/path.png`);
-  tiles["f1"] = loadImage(`${k}/tiles/forest1.png`);
-  tiles["f2"] = loadImage(`${k}/tiles/forest2.png`);
-  tiles["f3"] = loadImage(`${k}/tiles/forest3.png`);
-  mainChar.idle = loadImage(`${k}/CharDesign/playerIdle.png`);
-  mainChar.moving = [
-    loadImage(`${k}/CharDesign/playerMove0000.png`),
-    loadImage(`${k}/CharDesign/playerMove0001.png`),
-    loadImage(`${k}/CharDesign/playerMove0002.png`),
-  ];
-}
+
 function draw() {
   background(220);
   let posX = 0;
@@ -224,6 +193,7 @@ function draw() {
     image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize - 15);
   }
   currentFrameMove++;
+  drawCombat()
 }
 
 function tryEncounter() {
@@ -247,13 +217,12 @@ function tryEncounter() {
       if (xValue > 99) xValue = 99;
 
       if (
-        map[yValue][xValue] == "f" &&
+        map[yValue][xValue].includes("f") &&
         encCooldown[yValue][xValue] < lastRenderTime
       ) {
         let randomEncounter = Math.random();
         if (randomEncounter < encProb) {
-          console.log("boo!");
-          map[yValue][xValue] = "p"; //temporary
+          startCombat();
         }
         encCooldown[yValue][xValue] = lastRenderTime + encCooldownReset;
       }

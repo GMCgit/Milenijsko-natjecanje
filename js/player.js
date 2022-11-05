@@ -11,6 +11,7 @@ class Player {
     this.y = 19;
     this.idle = "";
     this.moving = [];
+    this.hp = 5;
   }
   move() {
     //used for smooth moving, Math.floor keeps true this.x, this.y
@@ -46,3 +47,6 @@ class Player {
     }
   }
 }
+
+
+let mainChar = new Player();
