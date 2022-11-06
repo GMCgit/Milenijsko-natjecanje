@@ -38,8 +38,10 @@ function dropLetter() {
     `Ovo slovo je ${lastLearned.meaning.toUpperCase()}`
   );
   introductionText.style("font-size", "20px");
+  introductionText.style("width", "200px");
+  introductionText.style("text-align", "center");
   introductionText.position(
-    combatFieldSize.x + combatFieldSize.w * 0.5 - 50,
+    window.innerWidth / 2 - 100,
     combatFieldSize.y + 10
   );
 }
@@ -145,10 +147,7 @@ function drawCombat() {
     charH - 30
   );
   //input
-  inputField.position(
-    combatFieldSize.x + combatFieldSize.w * 0.5 + 20,
-    charH + 30
-  );
+  inputField.position(window.innerWidth / 2 + 10, charH + 30);
   inputField.size(20);
   extraInputs = document.getElementsByTagName("input");
   for (let i = 0; i < extraInputs.length; i++) {
@@ -172,4 +171,10 @@ function drawCombat() {
       } catch {}
     }
   }
+  try {
+    introductionText.position(
+      window.innerWidth / 2 - 100,
+      combatFieldSize.y + 10
+    );
+  } catch {}
 }
