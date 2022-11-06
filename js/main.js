@@ -99,7 +99,6 @@ function handleTouchMove(e) {
 }
 
 function handleTouchEnd(e) {
-  e.preventDefault();
   keyMap["a"] = false;
   keyMap["s"] = false;
   keyMap["d"] = false;
