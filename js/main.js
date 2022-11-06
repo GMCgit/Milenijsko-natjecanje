@@ -37,10 +37,12 @@ function main(currentTime) {
 
 //Movement register
 addEventListener("keydown", (e) => {
+  if (currentState != "map") return;
   e.preventDefault();
   keyMap[e.key] = true;
 });
 addEventListener("keyup", (e) => {
+  if (currentState != "map") return;
   e.preventDefault();
   keyMap[e.key] = false;
 });
@@ -111,6 +113,12 @@ function update() {
 
   if (Math.floor(mainChar.x) != lastX || Math.floor(mainChar.y) != lastY) {
     tryEncounter();
+  }
+  let divs = document.getElementsByTagName("div");
+  if (currentState == "map") {
+    for (let i = 0; i < divs.length; i++) {
+      divs[i].remove();
+    }
   }
 }
 
@@ -193,7 +201,7 @@ function draw() {
     image(mainChar.idle, (countW / 2) * tileSize, (countH / 2) * tileSize - 15);
   }
   currentFrameMove++;
-  drawCombat()
+  drawCombat();
 }
 
 function tryEncounter() {
@@ -222,6 +230,10 @@ function tryEncounter() {
       ) {
         let randomEncounter = Math.random();
         if (randomEncounter < encProb) {
+          keyMap["a"] = false;
+          keyMap["s"] = false;
+          keyMap["d"] = false;
+          keyMap["w"] = false;
           startCombat();
         }
         encCooldown[yValue][xValue] = lastRenderTime + encCooldownReset;

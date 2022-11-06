@@ -16,7 +16,7 @@ let letters = [
   new letter("d", "dobro", `${loadPrefix}/letters/d.png`),
   new letter("e", "jest", `${loadPrefix}/letters/e.png`),
   new letter("ž", "živjet", `${loadPrefix}/letters/ž.png`),
-  new letter("dz", "dzjelo", `${loadPrefix}/letters/dz.png`),
+  /*new letter("dz", "dzjelo", `${loadPrefix}/letters/dz.png`),*/
   new letter("z", "zemlja", `${loadPrefix}/letters/z.png`),
   new letter("i", "iže", `${loadPrefix}/letters/i.png`),
   new letter("đ", "đerv", `${loadPrefix}/letters/đ.png`),
@@ -37,3 +37,4 @@ let letters = [
   new letter("č", "črv", `${loadPrefix}/letters/č.png`),
   new letter("š", "ša", `${loadPrefix}/letters/š.png`),
 ];
+letters[0].known = true

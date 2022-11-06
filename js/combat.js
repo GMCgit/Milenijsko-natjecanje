@@ -5,21 +5,77 @@ class enemy {
     this.hp = 5;
   }
 }
-
+let correctStreak = 0;
 let combatFieldSize = {
   x: width / 8,
   y: height / 8,
   w: (width * 6) / 8,
   h: (height * 6) / 8,
 };
-let enemyObj;
+let enemyObj,
+  inputField,
+  currentLetter,
+  lastLearned = letters[0],
+  introduced = false,
+  introductionText;
+
 function startCombat() {
   currentState = "combat";
 
-  let battleEnded = false;
   enemyObj = new enemy();
+  inputField = createInput("");
+  inputField.input(enterLetter);
+  dropLetter();
+}
 
-  setTimeout((m) => {currentState = "map"}, 2000)
+function dropLetter() {
+  let currentLetterPos = letters.filter((a) => a.known);
+  currentLetter =
+    currentLetterPos[Math.floor(Math.random() * currentLetterPos.length)];
+
+  introductionText = createElement(
+    "div",
+    `Ovo slovo je ${lastLearned.meaning.toUpperCase()}`
+  );
+  introductionText.style("font-size", "20px");
+  introductionText.position(
+    combatFieldSize.x + combatFieldSize.w * 0.5 - 50,
+    combatFieldSize.y + 10
+  );
+}
+
+function enterLetter() {
+  if (this.value() == currentLetter.meaning) {
+    enemyObj.hp--;
+    if (currentLetter.meaning == lastLearned.meaning) {
+      correctStreak++;
+      introduced = true;
+    }
+    if (correctStreak == 3) {
+      correctStreak = 0;
+      b = letters.filter((a) => !a.known);
+      lastLearned = b[Math.floor(Math.random() * b.length)];
+      lastLearned.known = true;
+      introduced = false;
+    }
+  } else {
+    if (currentLetter.meaning == lastLearned.meaning) {
+      mainChar.hp--;
+    }
+    correctStreak = 0;
+  }
+  if (enemyObj.hp == 0 || mainChar.hp == 0) {
+    currentState = "map";
+    inputField.remove();
+    if (currentLetter.meaning != lastLearned.meaning) {
+      try {
+        divs.remove();
+      } catch {}
+    }
+    mainChar.hp = 5;
+  }
+  dropLetter();
+  inputField.value("");
 }
 
 function drawCombat() {
@@ -83,4 +139,37 @@ function drawCombat() {
     image(tiles["heart"], (x0 + 20 * i) / 2 - yDiff * 50, y / 2 - yDiff * 10);
   }
   pop();
+  image(
+    currentLetter.src,
+    combatFieldSize.x + combatFieldSize.w * 0.5,
+    charH - 30
+  );
+  //input
+  inputField.position(
+    combatFieldSize.x + combatFieldSize.w * 0.5 + 20,
+    charH + 30
+  );
+  inputField.size(20);
+  extraInputs = document.getElementsByTagName("input");
+  for (let i = 0; i < extraInputs.length; i++) {
+    if (
+      extraInputs[i].getAttribute("style") == null ||
+      extraInputs[i].getAttribute("style") == ""
+    ) {
+      extraInputs[i].remove();
+    }
+  }
+
+  let divs = document.getElementsByTagName("div");
+  if (
+    introduced ||
+    currentLetter.meaning != lastLearned.meaning ||
+    currentState == "map"
+  ) {
+    for (let i = 0; i < divs.length; i++) {
+      try {
+        divs[i].remove();
+      } catch {}
+    }
+  }
 }
