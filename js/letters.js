@@ -7,7 +7,7 @@ class letter {
   }
 }
 let loadPrefix = "..";
-//loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
+loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
 let letters = [
   new letter("a", "az", `${loadPrefix}/letters/a.png`),
   new letter("b", "buki", `${loadPrefix}/letters/b.png`),
