@@ -45,7 +45,7 @@ function dropLetter() {
 }
 
 function enterLetter() {
-  if (this.value() == currentLetter.meaning) {
+  if (this.value().toLowerCase() == currentLetter.meaning) {
     enemyObj.hp--;
     if (currentLetter.meaning == lastLearned.meaning) {
       correctStreak++;
