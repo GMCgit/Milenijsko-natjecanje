@@ -10215,6 +10215,8 @@ for (let i = 0; i < 100; i++) {
     }
   }
 }
+
+//keeps width/height of map at screensize/map
 let width = Math.min(
   (window.innerWidth ||
     document.documentElement.clientWidth ||

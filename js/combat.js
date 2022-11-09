@@ -1,8 +1,13 @@
 class enemy {
-  constructor() {
+  /**
+   * @param {number} hp 
+   * @param {string} type doraSized for regular (letters), mid for mini boss (words) and bigPPBoy for big boss (quote)
+   */
+  constructor(hp, type) {
     this.xRel = -100;
     this.yRel = -105;
-    this.hp = 5;
+    this.hp = hp;
+    this.type = type
   }
 }
 let correctStreak = 0;
@@ -22,10 +27,12 @@ let enemyObj,
 function startCombat() {
   currentState = "combat";
 
-  enemyObj = new enemy();
+  enemyObj = new enemy(5, "doraSized");
   inputField = createInput("");
   inputField.input(enterLetter);
-  dropLetter();
+  if (enemyObj.type == "doraSized") {
+    dropLetter();
+  }
 }
 
 function dropLetter() {
@@ -108,9 +115,9 @@ function drawCombat() {
   );
   //characters
   let charH =
-    combatFieldSize.h > 250
-      ? combatFieldSize.y + combatFieldSize.h + enemyObj.yRel
-      : combatFieldSize.y + combatFieldSize.h + enemyObj.yRel + 50;
+    combatFieldSize.h > 250 ?
+    combatFieldSize.y + combatFieldSize.h + enemyObj.yRel :
+    combatFieldSize.y + combatFieldSize.h + enemyObj.yRel + 50;
   image(tiles["enemy"], combatFieldSize.x + (combatFieldSize.w * 2) / 3, charH);
   push();
   scale(2, 2);

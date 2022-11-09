@@ -1,4 +1,9 @@
 class letter {
+  /**
+   * @param {string} meaning 
+   * @param {string} pronounciation 
+   * @param {string} src 
+   */
   constructor(meaning, pronounciation, src) {
     this.meaning = meaning;
     this.pronounciation = pronounciation;
@@ -6,6 +11,16 @@ class letter {
     this.known = false;
   }
 }
+
+class word {
+  /**
+   * @param {Array} chars 
+   */
+  constructor(chars) {
+    this.chars = chars;
+  }
+}
+
 let loadPrefix = "..";
 loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
 let letters = [
