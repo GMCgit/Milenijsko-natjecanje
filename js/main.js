@@ -40,6 +40,18 @@ addEventListener("keydown", (e) => {
   if (currentState != "map") return;
   e.preventDefault();
   keyMap[e.key] = true;
+  //initiate mini boss battle
+  if (
+    e.key == "f" &&
+    map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "c"
+  ) {
+    keyMap[e.key] = true;
+    keyMap["a"] = false;
+    keyMap["s"] = false;
+    keyMap["d"] = false;
+    keyMap["w"] = false;
+    startCombat("mid");
+  }
 });
 addEventListener("keyup", (e) => {
   if (currentState != "map") return;
@@ -233,7 +245,7 @@ function tryEncounter() {
           keyMap["s"] = false;
           keyMap["d"] = false;
           keyMap["w"] = false;
-          startCombat();
+          startCombat("doraSized");
         }
         encCooldown[yValue][xValue] = lastRenderTime + encCooldownReset;
       }

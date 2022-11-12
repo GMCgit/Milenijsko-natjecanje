@@ -29,5 +29,6 @@ for i in range(100):
         elif values[i][j] == (83, 120, 111, 255): mapF[i].append("w")
         elif values[i][j] == (0, 0, 160, 255): mapF[i].append("s")
         elif values[i][j] == (143, 136, 130, 255): mapF[i].append("p")
+        elif values[i][j] == (237, 28, 36, 255): mapF[i].append("c")
 
 print(mapF)

@@ -1,13 +1,13 @@
 class enemy {
   /**
-   * @param {number} hp 
+   * @param {number} hp
    * @param {string} type doraSized for regular (letters), mid for mini boss (words) and bigPPBoy for big boss (quote)
    */
   constructor(hp, type) {
     this.xRel = -100;
     this.yRel = -105;
     this.hp = hp;
-    this.type = type
+    this.type = type;
   }
 }
 let correctStreak = 0;
@@ -24,16 +24,30 @@ let enemyObj,
   introduced = false,
   introductionText;
 
-function startCombat() {
+function startCombat(type) {
   currentState = "combat";
 
-  enemyObj = new enemy(5, "doraSized");
+  enemyObj = new enemy(5, type);
   inputField = createInput("");
-  inputField.input(enterLetter);
   if (enemyObj.type == "doraSized") {
     dropLetter();
+  } else if (enemyObj.type == "mid") {
+    dropSentence();
   }
 }
+
+//new letter submtion code so it supports words
+addEventListener("keydown", (e) => {
+  if (!currentState == "combat") return;
+  if (e.key == "Enter") {
+    enterLetter();
+  }
+});
+addEventListener("click", (e) => {
+  if (inputField !== e.target && inputField.value() !== "") {
+    enterLetter();
+  }
+});
 
 function dropLetter() {
   let currentLetterPos = letters.filter((a) => a.known);
@@ -52,9 +66,16 @@ function dropLetter() {
     combatFieldSize.y + 10
   );
 }
+function dropSentence() {
+  let wordChosen = words[Math.floor(Math.random() * words.length)].split("");
+  for (let i = 0; i < wordChosen.length; i++) {
+    wordChosen[i] = letters.filter((a) => a.meaning == wordChosen[i])[0];
+  }
+  currentLetter = new word(wordChosen);
+}
 
 function enterLetter() {
-  if (this.value().toLowerCase() == currentLetter.meaning) {
+  if (inputField.value().toLowerCase() == currentLetter.meaning) {
     enemyObj.hp--;
     if (currentLetter.meaning == lastLearned.meaning) {
       correctStreak++;
@@ -115,9 +136,9 @@ function drawCombat() {
   );
   //characters
   let charH =
-    combatFieldSize.h > 250 ?
-    combatFieldSize.y + combatFieldSize.h + enemyObj.yRel :
-    combatFieldSize.y + combatFieldSize.h + enemyObj.yRel + 50;
+    combatFieldSize.h > 250
+      ? combatFieldSize.y + combatFieldSize.h + enemyObj.yRel
+      : combatFieldSize.y + combatFieldSize.h + enemyObj.yRel + 50;
   image(tiles["enemy"], combatFieldSize.x + (combatFieldSize.w * 2) / 3, charH);
   push();
   scale(2, 2);
@@ -148,11 +169,16 @@ function drawCombat() {
     image(tiles["heart"], (x0 + 20 * i) / 2 - yDiff * 50, y / 2 - yDiff * 10);
   }
   pop();
-  image(
-    currentLetter.src,
-    combatFieldSize.x + combatFieldSize.w * 0.5,
-    charH - 30
-  );
+  if (currentLetter instanceof letter) {
+    image(
+      currentLetter.src,
+      combatFieldSize.x + combatFieldSize.w * 0.5,
+      charH - 30
+    );
+  } else if (currentLetter instanceof word) {
+    currentLetter.draw(combatFieldSize);
+  }
+
   //input
   inputField.position(window.innerWidth / 2 + 10, charH + 30);
   inputField.size(20);

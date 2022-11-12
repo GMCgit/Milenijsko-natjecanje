@@ -4,6 +4,7 @@
 ? s => sacred
 ? p => path
 ? w => water
+? c => cursed 
 */
 const map = [
   [
@@ -1655,7 +1656,7 @@ const map = [
     "g",
     "g",
     "g",
-    "g",
+    "c",
     "g",
     "g",
     "g",
@@ -10208,6 +10209,8 @@ const map = [
   ],
 ];
 
+const words = ["hi"]
+
 for (let i = 0; i < 100; i++) {
   for (let j = 0; j < 100; j++) {
     if (map[i][j] == "f") {
@@ -10241,6 +10244,7 @@ function preload() {
   tiles["f1"] = loadImage(`${loadPrefix}/tiles/forest1.png`);
   tiles["f2"] = loadImage(`${loadPrefix}/tiles/forest2.png`);
   tiles["f3"] = loadImage(`${loadPrefix}/tiles/forest3.png`);
+  tiles["c"] = loadImage(`${loadPrefix}/tiles/water.png`);
   mainChar.idle = loadImage(`${loadPrefix}/CharDesign/playerIdle.png`);
   mainChar.moving = [
     loadImage(`${loadPrefix}/CharDesign/playerMove0000.png`),

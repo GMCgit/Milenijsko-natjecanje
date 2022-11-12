@@ -19,6 +19,9 @@ class word {
   constructor(chars) {
     this.chars = chars;
   }
+  draw(combatFieldSize) {
+    console.log("hi")
+  }
 }
 
 let loadPrefix = "..";
