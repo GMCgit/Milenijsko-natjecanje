@@ -1,8 +1,8 @@
 class letter {
   /**
-   * @param {string} meaning 
-   * @param {string} pronounciation 
-   * @param {string} src 
+   * @param {string} meaning
+   * @param {string} pronounciation
+   * @param {string} src
    */
   constructor(meaning, pronounciation, src) {
     this.meaning = meaning;
@@ -14,13 +14,31 @@ class letter {
 
 class word {
   /**
-   * @param {Array} chars 
+   * @param {Array} chars
+   * @param {String} meaning
    */
-  constructor(chars) {
+  constructor(chars, meaning) {
     this.chars = chars;
+    this.meaning = meaning;
   }
   draw(combatFieldSize) {
-    console.log("hi")
+    let charH =
+      combatFieldSize.h > 250
+        ? combatFieldSize.y + combatFieldSize.h + enemyObj.yRel
+        : combatFieldSize.y + combatFieldSize.h + enemyObj.yRel + 50;
+
+    let xBase =
+      combatFieldSize.x +
+      combatFieldSize.w * 0.5 -
+      (this.chars.length * 25) / 2 +
+      25;
+    let yBase = charH - 30;
+    push();
+    scale(0.5, 0.5);
+    for (let i = 0; i < this.chars.length; i++) {
+      image(this.chars[i].src, xBase * 2 + i * 50, yBase * 2);
+    }
+    pop();
   }
 }
 
@@ -54,5 +72,6 @@ let letters = [
   new letter("c", "ci", `${loadPrefix}/letters/c.png`),
   new letter("č", "črv", `${loadPrefix}/letters/č.png`),
   new letter("š", "ša", `${loadPrefix}/letters/š.png`),
+  new letter("j", "je", `${loadPrefix}/letters/j.png`)
 ];
-letters[0].known = true
+letters[0].known = true;

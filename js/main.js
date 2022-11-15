@@ -45,12 +45,23 @@ addEventListener("keydown", (e) => {
     e.key == "f" &&
     map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "c"
   ) {
-    keyMap[e.key] = true;
     keyMap["a"] = false;
     keyMap["s"] = false;
     keyMap["d"] = false;
     keyMap["w"] = false;
-    startCombat("mid");
+    startCombat(10, "mid");
+  } else if (
+    e.key == "f" &&
+    map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "s"
+  ) {
+    keyMap["a"] = false;
+    keyMap["s"] = false;
+    keyMap["d"] = false;
+    keyMap["w"] = false;
+    currentSacredTree = sacredTreeStart(
+      Math.floor(mainChar.x),
+      Math.floor(mainChar.y)
+    );
   }
 });
 addEventListener("keyup", (e) => {
@@ -213,6 +224,9 @@ function draw() {
   }
   currentFrameMove++;
   drawCombat();
+  try {
+    currentSacredTree.draw();
+  } catch {}
 }
 
 function tryEncounter() {
@@ -245,7 +259,7 @@ function tryEncounter() {
           keyMap["s"] = false;
           keyMap["d"] = false;
           keyMap["w"] = false;
-          startCombat("doraSized");
+          startCombat(5, "doraSized");
         }
         encCooldown[yValue][xValue] = lastRenderTime + encCooldownReset;
       }

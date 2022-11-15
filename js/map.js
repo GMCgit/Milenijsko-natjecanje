@@ -10209,7 +10209,32 @@ const map = [
   ],
 ];
 
-const words = ["hi"]
+let cursedTreesLeft = 0;
+map.forEach((row) => {
+  row.forEach((el) => {
+    if (el == "c") cursedTreesLeft++;
+  });
+});
+
+const words = [
+  "zara",
+  "drvo",
+  "kuna",
+  "az",
+  "zemla",
+  "knjiga",
+  "pokoj",
+  "pas",
+  "slovo",
+  "jezik",
+  "bukvi",
+  "vedi",
+  "glagoljo",
+  "dobre",
+  "jest",
+  "živjeti",
+  "jeronim",
+];
 
 for (let i = 0; i < 100; i++) {
   for (let j = 0; j < 100; j++) {
@@ -10236,25 +10261,3 @@ let height = Math.min(
 );
 
 let tiles = [];
-function preload() {
-  tiles["w"] = loadImage(`${loadPrefix}/tiles/water.png`);
-  tiles["g"] = loadImage(`${loadPrefix}/tiles/grass.png`);
-  tiles["s"] = loadImage(`${loadPrefix}/tiles/sacred.png`);
-  tiles["p"] = loadImage(`${loadPrefix}/tiles/path.png`);
-  tiles["f1"] = loadImage(`${loadPrefix}/tiles/forest1.png`);
-  tiles["f2"] = loadImage(`${loadPrefix}/tiles/forest2.png`);
-  tiles["f3"] = loadImage(`${loadPrefix}/tiles/forest3.png`);
-  tiles["c"] = loadImage(`${loadPrefix}/tiles/water.png`);
-  mainChar.idle = loadImage(`${loadPrefix}/CharDesign/playerIdle.png`);
-  mainChar.moving = [
-    loadImage(`${loadPrefix}/CharDesign/playerMove0000.png`),
-    loadImage(`${loadPrefix}/CharDesign/playerMove0001.png`),
-    loadImage(`${loadPrefix}/CharDesign/playerMove0002.png`),
-  ];
-  tiles["bg"] = loadImage(`${loadPrefix}/tiles/background.png`);
-  tiles["enemy"] = loadImage(`${loadPrefix}/CharDesign/enemy.png`);
-  tiles["heart"] = loadImage(`${loadPrefix}/tiles/heart.png`);
-  for (let i = 0; i < letters.length; i++) {
-    letters[i].src = loadImage(letters[i].src);
-  }
-}

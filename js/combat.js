@@ -24,26 +24,28 @@ let enemyObj,
   introduced = false,
   introductionText;
 
-function startCombat(type) {
+function startCombat(hp, type) {
   currentState = "combat";
 
-  enemyObj = new enemy(5, type);
+  enemyObj = new enemy(hp, type);
   inputField = createInput("");
   if (enemyObj.type == "doraSized") {
     dropLetter();
+    inputField.input(enterLetter);
   } else if (enemyObj.type == "mid") {
-    dropSentence();
+    dropWord();
   }
 }
 
 //new letter submtion code so it supports words
 addEventListener("keydown", (e) => {
-  if (!currentState == "combat") return;
+  if (currentState !== "combat") return;
   if (e.key == "Enter") {
     enterLetter();
   }
 });
 addEventListener("click", (e) => {
+  if (currentState !== "combat") return;
   if (inputField !== e.target && inputField.value() !== "") {
     enterLetter();
   }
@@ -66,17 +68,18 @@ function dropLetter() {
     combatFieldSize.y + 10
   );
 }
-function dropSentence() {
-  let wordChosen = words[Math.floor(Math.random() * words.length)].split("");
+function dropWord() {
+  let wordChosenStr = words[Math.floor(Math.random() * words.length)];
+  let wordChosen = wordChosenStr.split("");
   for (let i = 0; i < wordChosen.length; i++) {
     wordChosen[i] = letters.filter((a) => a.meaning == wordChosen[i])[0];
   }
-  currentLetter = new word(wordChosen);
+  currentLetter = new word(wordChosen, wordChosenStr);
 }
 
 function enterLetter() {
   if (inputField.value().toLowerCase() == currentLetter.meaning) {
-    enemyObj.hp--;
+    enemyObj.hp -= currentLetter.meaning.length;
     if (currentLetter.meaning == lastLearned.meaning) {
       correctStreak++;
       introduced = true;
@@ -90,11 +93,11 @@ function enterLetter() {
     }
   } else {
     if (currentLetter.meaning == lastLearned.meaning) {
-      mainChar.hp--;
+      correctStreak = 0;
     }
-    correctStreak = 0;
+    mainChar.hp--;
   }
-  if (enemyObj.hp == 0 || mainChar.hp == 0) {
+  if (enemyObj.hp <= 0 || mainChar.hp <= 0) {
     currentState = "map";
     inputField.remove();
     if (currentLetter.meaning != lastLearned.meaning) {
@@ -103,8 +106,16 @@ function enterLetter() {
       } catch {}
     }
     mainChar.hp = 5;
+    if (enemyObj.hp <= 0) {
+      map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] = "g";
+      cursedTreesLeft--;
+    }
   }
-  dropLetter();
+  if (enemyObj.type == "doraSized") {
+    dropLetter();
+  } else if (enemyObj.type == "mid") {
+    dropWord();
+  }
   inputField.value("");
 }
 
@@ -180,8 +191,13 @@ function drawCombat() {
   }
 
   //input
-  inputField.position(window.innerWidth / 2 + 10, charH + 30);
-  inputField.size(20);
+  inputField.position(
+    enemyObj.type == "doraSized"
+      ? window.innerWidth / 2 + 10
+      : window.innerWidth / 2 + -10,
+    charH + 30
+  );
+  inputField.size(enemyObj.type == "doraSized" ? 20 : 60);
   extraInputs = document.getElementsByTagName("input");
   for (let i = 0; i < extraInputs.length; i++) {
     if (
