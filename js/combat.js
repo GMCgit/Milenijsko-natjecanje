@@ -55,7 +55,9 @@ function dropLetter() {
   let currentLetterPos = letters.filter((a) => a.known);
   currentLetter =
     currentLetterPos[Math.floor(Math.random() * currentLetterPos.length)];
-
+  if (!introduced) {
+    currentLetter = lastLearned;
+  }
   introductionText = createElement(
     "div",
     `Ovo slovo je ${lastLearned.meaning.toUpperCase()}`
@@ -84,7 +86,7 @@ function enterLetter() {
       correctStreak++;
       introduced = true;
     }
-    if (correctStreak == 3) {
+    if (correctStreak == 4) {
       correctStreak = 0;
       b = letters.filter((a) => !a.known);
       lastLearned = b[Math.floor(Math.random() * b.length)];
