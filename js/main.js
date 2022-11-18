@@ -174,6 +174,12 @@ function setup() {
   }
 }
 function windowResized() {
+  for (let j = 0; j < 3; j++) {
+    let buttons = document.getElementsByTagName("button");
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].remove();
+    }
+  }
   createCanvas(width, height);
 }
 
