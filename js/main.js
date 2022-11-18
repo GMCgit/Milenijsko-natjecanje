@@ -255,20 +255,19 @@ function draw() {
 
     filter(BLUR, 4);
     let newGame = createElement("button", "Nova igra");
+    newGame.addClass("homeScreenButton");
     let loadGame = createElement("button", "Nastavi igru");
+    loadGame.addClass("homeScreenButton");
     let instructions = createElement("button", "Upute");
+    instructions.addClass("homeScreenButton");
 
-    newGame.size(100);
-    loadGame.size(100);
-    instructions.size(100);
-
-    newGame.position(window.innerWidth / 2 - 50, height / 2);
+    newGame.position(window.innerWidth / 2 - 100, height / 2);
     newGame.mousePressed(startNewGame);
 
-    loadGame.position(window.innerWidth / 2 - 50, (height * 6) / 10);
+    loadGame.position(window.innerWidth / 2 - 100, (height * 6) / 10);
     loadGame.mousePressed(loadOldGame);
 
-    instructions.position(window.innerWidth / 2 - 50, (height * 7) / 10);
+    instructions.position(window.innerWidth / 2 - 100, (height * 7) / 10);
   }
 }
 
@@ -284,6 +283,11 @@ function startNewGame() {
   mainChar.x = 12;
   mainChar.y = 19;
   cursedTreesCleared = [];
+  backgroundMusic.play();
+  backgroundMusicInterval = setInterval(() => {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+  }, 175000);
 }
 
 function loadOldGame() {
@@ -305,6 +309,11 @@ function loadOldGame() {
       buttons[i].remove();
     }
   }
+  backgroundMusic.play();
+  backgroundMusicInterval = setInterval(() => {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+  }, 175000);
 }
 
 function saveState() {

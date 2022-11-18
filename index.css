@@ -20,9 +20,18 @@ canvas {
 h2 {
   padding-left: 10px;
   padding-right: 10px;
-  margin:10px;
+  margin: 10px;
 }
 p {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.homeScreenButton {
+  border-radius: 30%;
+  width: 200px;
+  height: 30px;
+  border-color: brown;
+  background-color: brown;
+  color: wheat;
 }

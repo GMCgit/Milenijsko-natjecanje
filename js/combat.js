@@ -11,6 +11,9 @@ class enemy {
   }
 }
 
+let backgroundMusicInterval;
+let enemyMusicInterval;
+
 let cursedTreesCleared;
 let correctStreak = 0;
 let combatFieldSize = {
@@ -28,6 +31,15 @@ let enemyObj,
 
 function startCombat(hp, type) {
   currentState = "combat";
+
+  backgroundMusic.pause();
+  clearInterval(backgroundMusicInterval);
+  enemyMusic.currentTime = 0;
+  enemyMusic.play();
+  enemyMusicInterval = setInterval(() => {
+    enemyMusic.currentTime = 0;
+    enemyMusic.play();
+  }, 100000);
 
   enemyObj = new enemy(hp, type);
   inputField = createInput("");
@@ -115,6 +127,15 @@ function enterLetter() {
       cursedTreesLeft--;
       cursedTreesCleared.push([Math.floor(mainChar.y), Math.floor(mainChar.x)]);
     }
+
+    enemyMusic.pause();
+    backgroundMusicInterval = setInterval(() => {
+      backgroundMusic.currentTime = 0;
+      backgroundMusic.play();
+    }, 175000);
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+    clearInterval(enemyMusicInterval);
   }
   if (enemyObj.type == "doraSized") {
     dropLetter();

@@ -43,7 +43,7 @@ class word {
 }
 
 let loadPrefix = "..";
-loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
+//loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
 let letters = [
   new letter("a", "az", `${loadPrefix}/letters/a.png`),
   new letter("b", "buki", `${loadPrefix}/letters/b.png`),
@@ -98,3 +98,9 @@ function convertBackToLetterArray() {
     }
   }
 }
+
+let backgroundMusic = new Audio(`${loadPrefix}/audio/background.mp3`);
+backgroundMusic.volume = 0.05;
+
+let enemyMusic = new Audio(`${loadPrefix}/audio/combat.mp3`);
+enemyMusic.volume = 0.1;
