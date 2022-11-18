@@ -29,6 +29,7 @@ class spirit {
     );
     talkingDiv.position((window.innerWidth - width) / 2 + 20, (height * 3) / 5);
     talkingDiv.size(width - 40, (height * 2) / 5);
+    talkingDiv.addClass("dialogue")
     push();
     scale(2, 2);
     image(

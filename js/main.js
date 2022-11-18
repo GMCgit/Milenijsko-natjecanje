@@ -227,6 +227,18 @@ function draw() {
   try {
     currentSacredTree.draw();
   } catch {}
+
+  //Load screen;
+  if (currentState == "loadScreen") {
+    let divs = document.getElementsByTagName("div");
+    for (let i = 0; i < divs.length; i++) {
+      divs[i].remove();
+    }
+
+    filter(BLUR, 4);
+    let a = createElement("div", "<h1> hi </h1>")
+    a.position(0, 0)
+  }
 }
 
 function tryEncounter() {

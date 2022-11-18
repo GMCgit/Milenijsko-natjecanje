@@ -11,7 +11,7 @@ canvas {
   width: 800px;
 }
 
-div {
+.dialogue {
   background-color: rgba(126, 126, 126, 0.5);
   color: whitesmoke;
   border-radius: 5%;
