@@ -29,14 +29,10 @@ class spirit {
     );
     talkingDiv.position((window.innerWidth - width) / 2 + 20, (height * 3) / 5);
     talkingDiv.size(width - 40, (height * 2) / 5);
-    talkingDiv.addClass("dialogue")
+    talkingDiv.addClass("dialogue");
     push();
     scale(2, 2);
-    image(
-      this.src,
-      ((window.innerWidth - width) / 2 + width - 150) / 2,
-      (height * 3) / 10 - 53
-    );
+    image(this.src, (width * 2) / 5, (height * 3) / 10 - 53);
     pop();
   }
 }
@@ -51,6 +47,18 @@ addEventListener("click", (e) => {
       }
     } catch {}
     currentState = "map";
+  } else if (
+    currentState == "map" &&
+    map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "s"
+  ) {
+    keyMap["a"] = false;
+    keyMap["s"] = false;
+    keyMap["d"] = false;
+    keyMap["w"] = false;
+    currentSacredTree = sacredTreeStart(
+      Math.floor(mainChar.x),
+      Math.floor(mainChar.y)
+    );
   }
 });
 addEventListener("keydown", (e) => {
