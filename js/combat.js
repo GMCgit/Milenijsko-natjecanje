@@ -10,6 +10,8 @@ class enemy {
     this.type = type;
   }
 }
+
+let cursedTreesCleared;
 let correctStreak = 0;
 let combatFieldSize = {
   x: width / 8,
@@ -108,9 +110,10 @@ function enterLetter() {
       } catch {}
     }
     mainChar.hp = 5;
-    if (enemyObj.hp <= 0) {
+    if (enemyObj.hp <= 0 && enemyObj.type == "mid") {
       map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] = "g";
       cursedTreesLeft--;
+      cursedTreesCleared.push([Math.floor(mainChar.y), Math.floor(mainChar.x)]);
     }
   }
   if (enemyObj.type == "doraSized") {

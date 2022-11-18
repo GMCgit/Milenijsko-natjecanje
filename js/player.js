@@ -1,5 +1,5 @@
 let keyMap = [];
-let currentState = "map";
+let currentState = "loadScreen";
 let mul;
 //Border is non walkable areas
 let Border = ["w","f1", "f2", "f3"];
@@ -7,8 +7,8 @@ let Border = ["w","f1", "f2", "f3"];
 class Player {
   constructor() {
     this.idle = new Image();
-    this.x = 12;
-    this.y = 19;
+    this.x;
+    this.y;
     this.idle = "";
     this.moving = [];
     this.hp = 5;

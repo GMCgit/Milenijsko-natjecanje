@@ -142,6 +142,9 @@ function update() {
       divs[i].remove();
     }
   }
+  if (currentState != "loadScreen") {
+    saveState();
+  }
 }
 
 function setup() {
@@ -179,24 +182,33 @@ function draw() {
   let posX = 0;
   let posY = 0;
 
+  let mainCharX, mainCharY;
+  if (typeof mainChar.x == "undefined") {
+    mainCharX = 12;
+    mainCharY = 19;
+  } else {
+    mainCharX = mainChar.x;
+    mainCharY = mainChar.y;
+  }
+
   countW = (Math.ceil(width / 100) * 100) / tileSize + 1;
   countH = (Math.ceil(height / 100) * 100) / tileSize + 1;
 
   for (let i = 0; i < countH + 10; i += 1) {
     posX = 0;
     for (let j = 0; j < countW + 10; j += 1) {
-      let yValue = mainChar.y - Math.ceil(countH / 2) + i;
+      let yValue = mainCharY - Math.ceil(countH / 2) + i;
       if (yValue < 0) yValue = 0;
       if (yValue > 99) yValue = 99;
 
-      let xValue = mainChar.x - Math.ceil(countW / 2) + j;
+      let xValue = mainCharX - Math.ceil(countW / 2) + j;
       if (xValue < 0) xValue = 0;
       if (xValue > 99) xValue = 99;
 
       image(
         tiles[map[Math.floor(yValue)][Math.floor(xValue)]],
-        posX * tileSize - (mainChar.x - Math.floor(mainChar.x)) * tileSize,
-        posY * tileSize - (mainChar.y - Math.floor(mainChar.y)) * tileSize
+        posX * tileSize - (mainCharX - Math.floor(mainCharX)) * tileSize,
+        posY * tileSize - (mainCharY - Math.floor(mainCharY)) * tileSize
       );
       posX++;
     }
@@ -230,15 +242,70 @@ function draw() {
 
   //Load screen;
   if (currentState == "loadScreen") {
-    let divs = document.getElementsByTagName("div");
-    for (let i = 0; i < divs.length; i++) {
-      divs[i].remove();
+    let buttons = document.getElementsByTagName("button");
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].remove();
     }
 
     filter(BLUR, 4);
-    let a = createElement("div", "<h1> hi </h1>")
-    a.position(0, 0)
+    let newGame = createElement("button", "Nova igra");
+    let loadGame = createElement("button", "Nastavi igru");
+    let instructions = createElement("button", "Upute");
+
+    newGame.size(100);
+    loadGame.size(100);
+    instructions.size(100);
+
+    newGame.position(window.innerWidth / 2 - 50, height / 2);
+    newGame.mousePressed(startNewGame);
+
+    loadGame.position(window.innerWidth / 2 - 50, (height * 6) / 10);
+    loadGame.mousePressed(loadOldGame);
+
+    instructions.position(window.innerWidth / 2 - 50, (height * 7) / 10);
   }
+}
+
+function startNewGame() {
+  currentState = "map";
+  for (let j = 0; j < 3; j++) {
+    let buttons = document.getElementsByTagName("button");
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].remove();
+    }
+  }
+  localStorage.clear();
+  mainChar.x = 12;
+  mainChar.y = 19;
+  cursedTreesCleared = [];
+}
+
+function loadOldGame() {
+  mainChar.x = Math.floor(localStorage.getItem("x"));
+  mainChar.y = Math.floor(localStorage.getItem("y"));
+  cursedTreesCleared = JSON.parse(localStorage.getItem("cursed"));
+
+  for (let i = 0; i < cursedTreesCleared.length; i++) {
+    map[cursedTreesCleared[i][0]][cursedTreesCleared[i][1]] = "g";
+  }
+  cursedTreesLeft -= cursedTreesCleared.length;
+
+  convertBackToLetterArray();
+
+  currentState = "map";
+  for (let j = 0; j < 3; j++) {
+    let buttons = document.getElementsByTagName("button");
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].remove();
+    }
+  }
+}
+
+function saveState() {
+  localStorage.setItem("x", mainChar.x);
+  localStorage.setItem("y", mainChar.y);
+  localStorage.setItem("letters", JSON.stringify(convertLetterArray()));
+  localStorage.setItem("cursed", JSON.stringify(cursedTreesCleared));
 }
 
 function tryEncounter() {
@@ -253,11 +320,20 @@ function tryEncounter() {
     for (let j = -encRadius; j <= encRadius; j++) {
       if (Math.abs(i) + Math.abs(j) > encRadius) continue; //diamond shaped radius
 
-      let yValue = i + Math.floor(mainChar.y);
+      let mainCharX, mainCharY;
+      if (typeof mainChar.x == "undefined") {
+        mainCharX = 12;
+        mainCharY = 19;
+      } else {
+        mainCharX = mainChar.x;
+        mainCharY = mainChar.y;
+      }
+
+      let yValue = i + Math.floor(mainCharY);
       if (yValue < 0) yValue = 0;
       if (yValue > 99) yValue = 99;
 
-      let xValue = j + Math.floor(mainChar.x);
+      let xValue = j + Math.floor(mainCharX);
       if (xValue < 0) xValue = 0;
       if (xValue > 99) xValue = 99;
 

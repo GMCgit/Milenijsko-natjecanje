@@ -72,6 +72,29 @@ let letters = [
   new letter("c", "ci", `${loadPrefix}/letters/c.png`),
   new letter("č", "črv", `${loadPrefix}/letters/č.png`),
   new letter("š", "ša", `${loadPrefix}/letters/š.png`),
-  new letter("j", "je", `${loadPrefix}/letters/j.png`)
+  new letter("j", "je", `${loadPrefix}/letters/j.png`),
 ];
 letters[0].known = true;
+
+function convertLetterArray() {
+  let converted = [];
+  let needToConvert = letters.filter((el) => el.known);
+  for (let i = 0; i < needToConvert.length; i++) {
+    converted.push({
+      m: needToConvert[i].meaning,
+      k: needToConvert[i].known,
+    });
+  }
+  return converted;
+}
+
+function convertBackToLetterArray() {
+  let converted = JSON.parse(localStorage.getItem("letters"));
+  for (let i = 0; i < converted.length; i++) {
+    for (let j = 0; j < letters.length; j++) {
+      if (converted[i].m == letters[j].meaning) {
+        letters[j].known = converted[i].k;
+      }
+    }
+  }
+}
