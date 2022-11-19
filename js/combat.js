@@ -110,16 +110,18 @@ function enterLetter() {
     if (enemyObj.type == "bigPPBoy") {
       currentWordInQuote++;
     }
-    if (currentLetter.meaning == lastLearned.meaning) {
-      correctStreak++;
-      introduced = true;
-    }
-    if (correctStreak == 4) {
-      correctStreak = 0;
-      b = letters.filter((a) => !a.known);
-      lastLearned = b[Math.floor(Math.random() * b.length)];
-      lastLearned.known = true;
-      introduced = false;
+    if (enemyObj.type == "doraSized") {
+      if (currentLetter.meaning == lastLearned.meaning) {
+        correctStreak++;
+        introduced = true;
+      }
+      if (correctStreak == 4) {
+        correctStreak = 0;
+        b = letters.filter((a) => !a.known);
+        lastLearned = b[Math.floor(Math.random() * b.length)];
+        lastLearned.known = true;
+        introduced = false;
+      }
     }
   } else {
     if (currentLetter.meaning == lastLearned.meaning) {
