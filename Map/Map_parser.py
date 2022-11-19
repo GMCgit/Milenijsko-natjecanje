@@ -1,6 +1,6 @@
 from PIL import Image
 
-pix = Image.open('c:/Users/marin/Documents/Informatika/Milenijsko natjecanje/Milenijsko-natjecanje/Map/Map.png', 'r')
+pix = Image.open('Map.png', 'r')
 print(pix.size)
 print(" ")
 imageD = list(pix.getdata())
@@ -59,9 +59,6 @@ for i in range(1,99):
 
         if(mapF[i-1][j-1] == "g" and mapF[i-1][j] == "g" and mapF[i][j-1] == "g"):
             mapC[i][j] = "wd4" 
-
-print(mapC[37][45])
-exit()
 
 print(mapF)
 print(mapC)
