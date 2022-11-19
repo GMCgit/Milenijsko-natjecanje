@@ -1,4 +1,5 @@
 from PIL import Image
+from random import randint
 
 pix = Image.open('Map.png', 'r')
 print(pix.size)
@@ -32,6 +33,8 @@ for i in range(100):
         elif values[i][j] == (237, 28, 36, 255): mapF[i].append("c")
         mapC[i].append(".")
 
+land = ["g", "f"]
+
 for i in range(1,99):
     for j in range(1,99):
         if(mapF[i][j] != "w"): continue
@@ -48,17 +51,23 @@ for i in range(1,99):
         if(mapF[i-1][j] == "g"):
             mapC[i][j] = "ws4"
 
-        if(mapF[i-1][j+1] == "g" and mapF[i-1][j] == "g" and mapF[i][j+1] == "g"):
+        if(mapF[i-1][j+1] in land and mapF[i-1][j] in land and mapF[i][j+1] in land):
             mapC[i][j] = "wd1"
         
-        if(mapF[i+1][j+1] == "g" and mapF[i+1][j] == "g" and mapF[i][j+1] == "g"):
+        if(mapF[i+1][j+1] in land and mapF[i+1][j] in land and mapF[i][j+1] in land):
             mapC[i][j] = "wd2"
 
-        if(mapF[i+1][j-1] == "g" and mapF[i+1][j] == "g" and mapF[i][j-1] == "g"):
+        if(mapF[i+1][j-1] in land and mapF[i+1][j] in land and mapF[i][j-1] in land):
             mapC[i][j] = "wd3"
 
-        if(mapF[i-1][j-1] == "g" and mapF[i-1][j] == "g" and mapF[i][j-1] == "g"):
+        if(mapF[i-1][j-1] in land and mapF[i-1][j] in land and mapF[i][j-1] in land):
             mapC[i][j] = "wd4" 
+
+for i in range(100):
+  for j in range(100): 
+    if mapF[i][j] == "f":
+      mapF[i][j] += str(randint(1,3))
+
 
 print(mapF)
 print(mapC)
