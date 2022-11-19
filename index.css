@@ -35,3 +35,21 @@ p {
   background-color: brown;
   color: wheat;
 }
+.bookButton {
+  cursor: pointer;
+  border-color: transparent;
+  background-color: transparent;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+}
+.introductionText {
+  font-size: 20px;
+  width: 200px;
+  text-align: center;
+  position: absolute;
+  justify-content: center;
+  background-color: rgba(209, 179, 47, 0.76);
+  border-radius: 15%;
+  margin-top: 75px;
+}

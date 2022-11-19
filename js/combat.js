@@ -14,6 +14,9 @@ class enemy {
 let backgroundMusicInterval;
 let enemyMusicInterval;
 
+let openBookButton;
+let currentWordInQuote = 0;
+
 let cursedTreesCleared;
 let correctStreak = 0;
 let combatFieldSize = {
@@ -25,7 +28,7 @@ let combatFieldSize = {
 let enemyObj,
   inputField,
   currentLetter,
-  lastLearned = letters[0],
+  lastLearned,
   introduced = false,
   introductionText;
 
@@ -46,7 +49,7 @@ function startCombat(hp, type) {
   if (enemyObj.type == "doraSized") {
     dropLetter();
     inputField.input(enterLetter);
-  } else if (enemyObj.type == "mid") {
+  } else if (enemyObj.type == "mid" || enemyObj.type == "bigPPBoy") {
     dropWord();
   }
 }
@@ -67,6 +70,12 @@ addEventListener("click", (e) => {
 
 function dropLetter() {
   let currentLetterPos = letters.filter((a) => a.known);
+  if (currentLetterPos.length == 0) {
+    b = letters.filter((a) => !a.known);
+    lastLearned = b[Math.floor(Math.random() * b.length)];
+    lastLearned.known = true;
+  }
+  currentLetterPos = letters.filter((a) => a.known);
   currentLetter =
     currentLetterPos[Math.floor(Math.random() * currentLetterPos.length)];
   if (!introduced) {
@@ -76,17 +85,19 @@ function dropLetter() {
     "div",
     `Ovo slovo je ${lastLearned.meaning.toUpperCase()}`
   );
-  introductionText.style("font-size", "20px");
-  introductionText.style("width", "200px");
-  introductionText.style("text-align", "center");
-  introductionText.position(
-    window.innerWidth / 2 - 100,
-    combatFieldSize.y + 10
-  );
+  introductionText.addClass("introductionText");
 }
 function dropWord() {
-  let wordChosenStr = words[Math.floor(Math.random() * words.length)];
-  let wordChosen = wordChosenStr.split("");
+  let wordChosenStr, wordChosen;
+  if (enemyObj.type == "mid") {
+    wordChosenStr = words[Math.floor(Math.random() * words.length)];
+  } else {
+    wordChosenStr = solution[currentWordInQuote];
+  }
+
+  try {
+    wordChosen = wordChosenStr.split("");
+  } catch {}
   for (let i = 0; i < wordChosen.length; i++) {
     wordChosen[i] = letters.filter((a) => a.meaning == wordChosen[i])[0];
   }
@@ -96,6 +107,9 @@ function dropWord() {
 function enterLetter() {
   if (inputField.value().toLowerCase() == currentLetter.meaning) {
     enemyObj.hp -= currentLetter.meaning.length;
+    if (enemyObj.type == "bigPPBoy") {
+      currentWordInQuote++;
+    }
     if (currentLetter.meaning == lastLearned.meaning) {
       correctStreak++;
       introduced = true;
@@ -114,20 +128,6 @@ function enterLetter() {
     mainChar.hp--;
   }
   if (enemyObj.hp <= 0 || mainChar.hp <= 0) {
-    currentState = "map";
-    inputField.remove();
-    if (currentLetter.meaning != lastLearned.meaning) {
-      try {
-        divs.remove();
-      } catch {}
-    }
-    mainChar.hp = 5;
-    if (enemyObj.hp <= 0 && enemyObj.type == "mid") {
-      map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] = "g";
-      cursedTreesLeft--;
-      cursedTreesCleared.push([Math.floor(mainChar.y), Math.floor(mainChar.x)]);
-    }
-
     enemyMusic.pause();
     backgroundMusicInterval = setInterval(() => {
       backgroundMusic.currentTime = 0;
@@ -136,10 +136,34 @@ function enterLetter() {
     backgroundMusic.currentTime = 0;
     backgroundMusic.play();
     clearInterval(enemyMusicInterval);
+    currentState = "map";
+    inputField.remove();
+    if (currentLetter.meaning != lastLearned.meaning) {
+      try {
+        divs.remove();
+      } catch {}
+    }
+    if (enemyObj.hp <= 0 && enemyObj.type == "mid") {
+      map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] = "g";
+      cursedTreesLeft--;
+      cursedTreesCleared.push([Math.floor(mainChar.y), Math.floor(mainChar.x)]);
+
+      if (cursedTreesLeft == 0) {
+        startBossFight();
+      }
+    }
+    if (enemyObj.type == "bigPPBoy" && mainChar.hp <= 0) {
+      currentWordInQuote = 0;
+      map[cursedTreesCleared[cursedTreesCleared.length - 1][0]][
+        cursedTreesCleared[cursedTreesCleared.length - 1][1]
+      ] = "c";
+      cursedTreesLeft = 1;
+    }
+    mainChar.hp = 5;
   }
   if (enemyObj.type == "doraSized") {
     dropLetter();
-  } else if (enemyObj.type == "mid") {
+  } else if (enemyObj.type == "mid" || enemyObj.type == "bigPPBoy") {
     dropWord();
   }
   inputField.value("");
@@ -199,11 +223,11 @@ function drawCombat() {
     let x0 =
       combatFieldSize.x +
       (combatFieldSize.w * 2) / 3 -
-      (enemyObj.hp > 5 ? 5 : enemyObj.hp) * 5 +
+      (enemyObj.hp > 7 ? 7 : enemyObj.hp) * 5 +
       5;
     let y = charH;
-    let yDiff = Math.floor(i / 5);
-    image(tiles["heart"], (x0 + 20 * i) / 2 - yDiff * 50, y / 2 - yDiff * 10);
+    let yDiff = Math.floor(i / 7);
+    image(tiles["heart"], (x0 + 20 * i) / 2 - yDiff * 70, y / 2 - yDiff * 10);
   }
   pop();
   if (currentLetter instanceof letter) {
@@ -252,4 +276,22 @@ function drawCombat() {
       combatFieldSize.y + 10
     );
   } catch {}
+}
+
+const solution = [
+  "narod",
+  "koji",
+  "ne",
+  "pamti",
+  "svoje",
+  "jučer",
+  "ne",
+  "može",
+  "projektirati",
+  "svoje",
+  "sutra",
+];
+
+function startBossFight() {
+  startCombat(54, "bigPPBoy");
 }

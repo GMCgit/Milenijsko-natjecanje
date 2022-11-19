@@ -113,7 +113,7 @@ let sacredTrees = [
     "Nikola Šubić Zrinski",
     "Ja sam grof Nikola IV. Zrinski, zvan Nikola Šubić Zrinski. Branio sam Siget od Osmanlija, gdje sam na kraju i izgubio život.",
     `${loadPrefix}/CharDesign/nikolaSubicZrinski.png`
-  )
+  ),
 ];
 
 function sacredTreeStart(x, y) {
@@ -150,11 +150,13 @@ function preload() {
   tiles["bg"] = loadImage(`${loadPrefix}/tiles/background.png`);
   tiles["enemy"] = loadImage(`${loadPrefix}/CharDesign/enemy.png`);
   tiles["heart"] = loadImage(`${loadPrefix}/tiles/heart.png`);
-  tiles["dict"] = loadImage(`${loadPrefix}/CharDesign/Dict.png`);
   for (let i = 0; i < letters.length; i++) {
     letters[i].src = loadImage(letters[i].src);
   }
   for (let i = 0; i < sacredTrees.length; i++) {
     sacredTrees[i].src = loadImage(sacredTrees[i].src);
   }
+  tiles["title"] = loadImage(`${loadPrefix}/tiles/title.png`);
+
+  loadDick();
 }

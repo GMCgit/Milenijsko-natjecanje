@@ -90,7 +90,7 @@ function handleTouchStart(e) {
   touchPosition0.y = e.changedTouches[0].pageY;
   var canvasPosition = canvas.getBoundingClientRect();
 }
-
+let moved = false;
 function handleTouchMove(e) {
   touchPosition1.x = e.changedTouches[0].pageX;
   touchPosition1.y = e.changedTouches[0].pageY;
@@ -120,6 +120,16 @@ function handleTouchMove(e) {
     keyMap["w"] = false;
     keyMap["s"] = false;
   }
+  if (currentState == "dictionary" && moved == false) {
+    if (-xDiff > 50) {
+      currentPage = (currentPage + 1) % 14;
+      moved = true;
+    } else if (-xDiff < -50) {
+      if (currentPage == 0) currentPage = 14;
+      currentPage = (currentPage - 1) % 14;
+      moved = true;
+    }
+  }
 }
 
 function handleTouchEnd(e) {
@@ -127,6 +137,7 @@ function handleTouchEnd(e) {
   keyMap["s"] = false;
   keyMap["d"] = false;
   keyMap["w"] = false;
+  moved = false;
 }
 
 function update() {
@@ -146,6 +157,9 @@ function update() {
   if (currentState != "loadScreen") {
     saveState();
   }
+  try {
+    openBookButton.position(window.innerWidth / 2 + width / 2 - 55, 10);
+  } catch {}
 }
 
 function setup() {
@@ -176,7 +190,7 @@ function setup() {
 }
 function windowResized() {
   for (let j = 0; j < 3; j++) {
-    let buttons = document.getElementsByTagName("button");
+    let buttons = document.getElementsByClassName("homeScreenButton");
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].remove();
     }
@@ -278,13 +292,17 @@ function draw() {
     loadGame.mousePressed(loadOldGame);
 
     instructions.position(window.innerWidth / 2 - 100, (height * 7) / 10);
+    push();
+    scale(1.5);
+    image(tiles["title"], width / 3 - 100, 20);
+    pop();
   }
 }
 
 function startNewGame() {
   currentState = "map";
   for (let j = 0; j < 3; j++) {
-    let buttons = document.getElementsByTagName("button");
+    let buttons = document.getElementsByClassName("homeScreenButton");
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].remove();
     }
@@ -298,6 +316,8 @@ function startNewGame() {
     backgroundMusic.currentTime = 0;
     backgroundMusic.play();
   }, 175000);
+
+  createBookButton();
 }
 
 function loadOldGame() {
@@ -314,7 +334,7 @@ function loadOldGame() {
 
   currentState = "map";
   for (let j = 0; j < 3; j++) {
-    let buttons = document.getElementsByTagName("button");
+    let buttons = document.getElementsByClassName("homeScreenButton");
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].remove();
     }
@@ -324,6 +344,27 @@ function loadOldGame() {
     backgroundMusic.currentTime = 0;
     backgroundMusic.play();
   }, 175000);
+
+  createBookButton();
+}
+
+function createBookButton() {
+  openBookButton = createElement(
+    "button",
+    `<image src="${loadPrefix}/tiles/book.png"></image>`
+  );
+  openBookButton.addClass("bookButton");
+  openBookButton.mousePressed(() => {
+    if (currentState == "map") {
+      currentState = "dictionary";
+    } else if (currentState == "dictionary") {
+      currentState = "map";
+      keyMap["a"] = false;
+      keyMap["s"] = false;
+      keyMap["d"] = false;
+      keyMap["w"] = false;
+    }
+  });
 }
 
 function saveState() {

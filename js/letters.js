@@ -43,19 +43,21 @@ class word {
 }
 
 let loadPrefix = "..";
-loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
+//loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
 let letters = [
   new letter("a", "az", `${loadPrefix}/letters/a.png`),
   new letter("b", "buki", `${loadPrefix}/letters/b.png`),
-  new letter("v", "vjedje", `${loadPrefix}/letters/v.png`),
-  new letter("g", "glagolju", `${loadPrefix}/letters/g.png`),
+  new letter("c", "ci", `${loadPrefix}/letters/c.png`),
+  new letter("ć", "šta", `${loadPrefix}/letters/ć.png`),
+  new letter("č", "črv", `${loadPrefix}/letters/č.png`),
   new letter("d", "dobro", `${loadPrefix}/letters/d.png`),
-  new letter("e", "jest", `${loadPrefix}/letters/e.png`),
-  new letter("ž", "živjet", `${loadPrefix}/letters/ž.png`),
-  /*new letter("dz", "dzjelo", `${loadPrefix}/letters/dz.png`),*/
-  new letter("z", "zemlja", `${loadPrefix}/letters/z.png`),
-  new letter("i", "iže", `${loadPrefix}/letters/i.png`),
   new letter("đ", "đerv", `${loadPrefix}/letters/đ.png`),
+  new letter("e", "jest", `${loadPrefix}/letters/e.png`),
+  new letter("f", "frt", `${loadPrefix}/letters/f.png`),
+  new letter("g", "glagolju", `${loadPrefix}/letters/g.png`),
+  new letter("h", "hjer", `${loadPrefix}/letters/h.png`),
+  new letter("i", "iže", `${loadPrefix}/letters/i.png`),
+  new letter("j", "je", `${loadPrefix}/letters/j.png`),
   new letter("k", "kako", `${loadPrefix}/letters/k.png`),
   new letter("l", "ljudije", `${loadPrefix}/letters/l.png`),
   new letter("m", "mislite", `${loadPrefix}/letters/m.png`),
@@ -64,17 +66,14 @@ let letters = [
   new letter("p", "pokoj", `${loadPrefix}/letters/p.png`),
   new letter("r", "rci", `${loadPrefix}/letters/r.png`),
   new letter("s", "slovo", `${loadPrefix}/letters/s.png`),
+  new letter("š", "ša", `${loadPrefix}/letters/š.png`),
   new letter("t", "tvrdo", `${loadPrefix}/letters/t.png`),
   new letter("u", "uk", `${loadPrefix}/letters/u.png`),
-  new letter("f", "frt", `${loadPrefix}/letters/f.png`),
-  new letter("h", "hjer", `${loadPrefix}/letters/h.png`),
-  new letter("ć", "šta", `${loadPrefix}/letters/ć.png`),
-  new letter("c", "ci", `${loadPrefix}/letters/c.png`),
-  new letter("č", "črv", `${loadPrefix}/letters/č.png`),
-  new letter("š", "ša", `${loadPrefix}/letters/š.png`),
-  new letter("j", "je", `${loadPrefix}/letters/j.png`),
+  new letter("v", "vjedje", `${loadPrefix}/letters/v.png`),
+  new letter("z", "zemlja", `${loadPrefix}/letters/z.png`),
+  new letter("ž", "živjet", `${loadPrefix}/letters/ž.png`),
+  /*new letter("dz", "dzjelo", `${loadPrefix}/letters/dz.png`),*/
 ];
-letters[0].known = true;
 
 function convertLetterArray() {
   let converted = [];
