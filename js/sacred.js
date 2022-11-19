@@ -150,6 +150,7 @@ function preload() {
   tiles["bg"] = loadImage(`${loadPrefix}/tiles/background.png`);
   tiles["enemy"] = loadImage(`${loadPrefix}/CharDesign/enemy.png`);
   tiles["heart"] = loadImage(`${loadPrefix}/tiles/heart.png`);
+  tiles["dict"] = loadImage(`${loadPrefix}/CharDesign/Dict.png`);
   for (let i = 0; i < letters.length; i++) {
     letters[i].src = loadImage(letters[i].src);
   }

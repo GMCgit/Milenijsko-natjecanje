@@ -64,6 +64,7 @@ addEventListener("keydown", (e) => {
     );
   }
 });
+
 addEventListener("keyup", (e) => {
   if (currentState != "map") return;
   e.preventDefault();
@@ -251,6 +252,7 @@ function draw() {
   }
   currentFrameMove++;
   drawCombat();
+  drawDict();
   try {
     currentSacredTree.draw();
   } catch {}
