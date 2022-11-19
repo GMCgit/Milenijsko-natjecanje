@@ -88,7 +88,7 @@ let sacredTrees = [
     75,
     "Ćiril",
     "Ja sam Ćiril, rođen sam u Solunu gdje sam i odrastao. Mene i mog brata je poslao knez Rastislav da propovijedamo kršćansku vjeru na slavenskom jeziku. Ja sam sastavio glagoljicu, prvo slavensko pismo i preveo sam najvažnije crkvene knjige na jezik makedonskih Slavena.",
-    `${loadPrefix}/CharDesign/petarZrinski.png`
+    `${loadPrefix}/CharDesign/ciril.png`
   ),
 
   new spirit(
@@ -96,7 +96,7 @@ let sacredTrees = [
     17,
     "Grgur Ninski",
     "Ja sam Grgur Ninski. Vodio sam Ninsku biskupiju i sa kraljem Tomislavom borio sam se za crkvu na slavenskom jeziku i pismu. Nažalost, brzo je svećenicima bilo zabranjeno voditi mise na slavenskom jeziku.",
-    `${loadPrefix}/CharDesign/petarZrinski.png`
+    `${loadPrefix}/CharDesign/grgurNinski.png`
   ),
 
   new spirit(
@@ -104,7 +104,7 @@ let sacredTrees = [
     49,
     "Kralj Zvonimir",
     "Ja sam Zvonimir, kralj Hrvata. Za vrijeme moje vladavine Hrvatska je bila u miru i blagostanju, ali moja smrt je izazvala krvoproliće. Gradio sam crkve i samostane, u jednom od njih našli su i  Bašćansku ploču, izuzetno bitan izvor za povijest hrvatskog naroda i pisma.",
-    `${loadPrefix}/CharDesign/petarZrinski.png`
+    `${loadPrefix}/CharDesign/kraljZvonimir.png`
   ),
 
   new spirit(
@@ -112,7 +112,7 @@ let sacredTrees = [
     26,
     "Nikola Šubić Zrinski",
     "Ja sam grof Nikola IV. Zrinski, zvan Nikola Šubić Zrinski. Branio sam Siget od Osmanlija, gdje sam na kraju i izgubio život.",
-    `${loadPrefix}/CharDesign/petarZrinski.png`
+    `${loadPrefix}/CharDesign/nikolaSubicZrinski.png`
   )
 ];
 
