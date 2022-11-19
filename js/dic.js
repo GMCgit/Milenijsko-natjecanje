@@ -75,6 +75,6 @@ function loadDick() {
   dictPage[11] = loadImage(`${loadPrefix}/dictionary/12.png`);
   dictPage[12] = loadImage(`${loadPrefix}/dictionary/13.png`);
   dictPage[13] = loadImage(`${loadPrefix}/dictionary/14.png`);
-  dictPage[14] = loadImage(`${loadPrefix}/dictionary/mist1.png`);
-  dictPage[15] = loadImage(`${loadPrefix}/dictionary/mist2.png`);
+  dictPage[14] = loadImage(`${loadPrefix}/dictionary/Mist1.png`);
+  dictPage[15] = loadImage(`${loadPrefix}/dictionary/Mist2.png`);
 }
