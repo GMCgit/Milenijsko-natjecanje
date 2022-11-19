@@ -190,8 +190,8 @@ function draw() {
 
   let mainCharX, mainCharY;
   if (typeof mainChar.x == "undefined") {
-    mainCharX = 12;
-    mainCharY = 19;
+    mainCharX = 29;
+    mainCharY = 79;
   } else {
     mainCharX = mainChar.x;
     mainCharY = mainChar.y;
@@ -211,11 +211,20 @@ function draw() {
       if (xValue < 0) xValue = 0;
       if (xValue > 99) xValue = 99;
 
-      image(
-        tiles[map[Math.floor(yValue)][Math.floor(xValue)]],
-        posX * tileSize - (mainCharX - Math.floor(mainCharX)) * tileSize,
-        posY * tileSize - (mainCharY - Math.floor(mainCharY)) * tileSize
-      );
+      if(mapC[Math.floor(yValue)][Math.floor(xValue)] != '.'){
+        image(
+          tiles[mapC[Math.floor(yValue)][Math.floor(xValue)]],
+          posX * tileSize - (mainCharX - Math.floor(mainCharX)) * tileSize,
+          posY * tileSize - (mainCharY - Math.floor(mainCharY)) * tileSize
+        );
+      }
+      else{
+        image(
+          tiles[map[Math.floor(yValue)][Math.floor(xValue)]],
+          posX * tileSize - (mainCharX - Math.floor(mainCharX)) * tileSize,
+          posY * tileSize - (mainCharY - Math.floor(mainCharY)) * tileSize
+        );
+      }
       posX++;
     }
     posY++;
@@ -280,8 +289,8 @@ function startNewGame() {
     }
   }
   localStorage.clear();
-  mainChar.x = 12;
-  mainChar.y = 19;
+  mainChar.x = 29;
+  mainChar.y = 79;
   cursedTreesCleared = [];
   backgroundMusic.play();
   backgroundMusicInterval = setInterval(() => {
