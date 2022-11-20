@@ -79,7 +79,7 @@ let sacredTrees = [
     42,
     67,
     "Petar Zrinski",
-    "Ja sam Petar Zrinski. Nastavio sam borbu za prava Hrvatske koju je započeo moj brat, a kada je Vašvarskim mirom Beč Osmanlijama dao osvojena područja Hrvatske pokušao sam učiniti sve da bi smanjio centralizam cara. 1671. išao sam u Bečko novo na poziv cara, gdje smo Fran Krsto Frankopan i ja bili pogubljeni, čime su na neko vrijeme propale dvije najvažnije hrvatske loze.",
+    "Ja sam Petar Zrinski. Nastavio sam borbu za prava Hrvatske koju je započeo moj brat, a kada je Varšavskim mirom Beč Osmanlijama dao osvojena područja Hrvatske pokušao sam učiniti sve da bih smanjio centralizam cara. 1671. išao sam u Bečko Novo Mjesto na poziv cara, gdje smo Fran Krsto Frankopan i ja bili pogubljeni, čime su na neko vrijeme propale dvije najvažnije hrvatske loze.",
     `${loadPrefix}/CharDesign/petarZrinski.png`
   ),
 
@@ -153,7 +153,7 @@ let sacredTrees = [
   new spirit(
     56,
     66,
-    "Inkanabula",
+    "Inkunabula",
     "Knjige tiskane prije 1500., kada je tiskarstvo bilo u povojima. Važne su za europsku kulturu jer su predlošci za kasnije tiskane knjige.",
     `${loadPrefix}/CharDesign/npis.png`
   ),
