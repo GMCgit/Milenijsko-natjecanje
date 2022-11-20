@@ -124,7 +124,10 @@ function enterLetter() {
         b = letters.filter((a) => !a.known);
         lastLearned = b[Math.floor(Math.random() * b.length)];
         lastLearned.known = true;
-        localStorage.setItem("lastLearned", JSON.stringify(lastLearned.meaning));
+        localStorage.setItem(
+          "lastLearned",
+          JSON.stringify(lastLearned.meaning)
+        );
         introduced = false;
       }
     }
@@ -147,11 +150,11 @@ function enterLetter() {
     clearInterval(enemyMusicInterval);
     currentState = "map";
     inputField.remove();
-    if (currentLetter.meaning != lastLearned.meaning) {
-      try {
+    try {
+      if (currentLetter.meaning != lastLearned.meaning) {
         divs.remove();
-      } catch {}
-    }
+      }
+    } catch {}
     if (enemyObj.hp <= 0 && enemyObj.type == "mid") {
       map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] = "g";
       cursedTreesLeft--;
