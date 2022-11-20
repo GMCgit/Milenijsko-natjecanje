@@ -9,6 +9,8 @@ let currentFrameMove = 0;
 
 let encCooldown = [];
 let lastX, lastY;
+let showInstructions = false;
+let muteButton;
 
 main();
 
@@ -36,11 +38,37 @@ function main(currentTime) {
 }
 
 //Movement register
+addEventListener("click", (e) => {
+  if (showInstructions) {
+    showInstructions = false;
+  }
+});
 addEventListener("keydown", (e) => {
+  if (showInstructions) {
+    showInstructions = false;
+  }
+
   if (currentState != "map") return;
   e.preventDefault();
   keyMap[e.key] = true;
   //initiate mini boss battle
+  if (e.key == "Escape") {
+    currentState = "loadScreen";
+    keyMap["a"] = false;
+    keyMap["s"] = false;
+    keyMap["d"] = false;
+    keyMap["w"] = false;
+
+    openBookButton.remove();
+    muteButton = createElement(
+      "button",
+      `<image src="${loadPrefix}/tiles/book.png"></image>`
+    );
+    muteButton.addClass("bookButton");
+    muteButton.mousePressed(muteVolume);
+    muteButton.position(window.innerWidth / 2 + width / 2 - 55, 10);
+    return;
+  }
   if (
     e.key == "f" &&
     map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "c"
@@ -52,7 +80,8 @@ addEventListener("keydown", (e) => {
     startCombat(10, "mid");
   } else if (
     e.key == "f" &&
-    map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "s"
+    (map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "s" ||
+      map[Math.floor(mainChar.y)][Math.floor(mainChar.x)] == "n")
   ) {
     keyMap["a"] = false;
     keyMap["s"] = false;
@@ -180,6 +209,14 @@ function setup() {
     )
   );
 
+  muteButton = createElement(
+    "button",
+    `<image src="${loadPrefix}/tiles/book.png"></image>`
+  );
+  muteButton.addClass("bookButton");
+  muteButton.mousePressed(muteVolume);
+  muteButton.position(window.innerWidth / 2 + width / 2 - 65, 10);
+
   for (let i = 0; i < 107; i++) {
     let arr = [];
     for (let j = 0; j < 107; j++) {
@@ -272,7 +309,7 @@ function draw() {
 
   //Load screen;
   if (currentState == "loadScreen") {
-    let buttons = document.getElementsByTagName("button");
+    let buttons = document.getElementsByClassName("homeScreenButton");
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].remove();
     }
@@ -284,6 +321,7 @@ function draw() {
     loadGame.addClass("homeScreenButton");
     let instructions = createElement("button", "Upute");
     instructions.addClass("homeScreenButton");
+    instructions.id("instructionButton");
 
     newGame.position(window.innerWidth / 2 - 100, height / 2);
     newGame.mousePressed(startNewGame);
@@ -292,10 +330,27 @@ function draw() {
     loadGame.mousePressed(loadOldGame);
 
     instructions.position(window.innerWidth / 2 - 100, (height * 7) / 10);
+    instructions.mousePressed(loadInstructions);
+
     push();
     scale(1.5);
     image(tiles["title"], width / 3 - 100, 20);
     pop();
+  }
+  if (showInstructions) {
+    for (let j = 0; j < 3; j++) {
+      let buttons = document.getElementsByClassName("homeScreenButton");
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].remove();
+      }
+    }
+    image(
+      tiles["controls"],
+      width / 20,
+      height / 20,
+      (width * 9) / 10,
+      (height * 9) / 10
+    );
   }
 }
 
@@ -344,7 +399,9 @@ function loadOldGame() {
     backgroundMusic.currentTime = 0;
     backgroundMusic.play();
   }, 175000);
-
+  lastLearned = letters.filter(
+    (el) => el.meaning == JSON.parse(localStorage.getItem("lastLearned"))
+  )[0];
   createBookButton();
 }
 
@@ -365,6 +422,11 @@ function createBookButton() {
       keyMap["w"] = false;
     }
   });
+  muteButton.remove();
+}
+
+function loadInstructions() {
+  showInstructions = true;
 }
 
 function saveState() {

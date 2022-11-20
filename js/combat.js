@@ -14,6 +14,9 @@ class enemy {
 let backgroundMusicInterval;
 let enemyMusicInterval;
 
+let wonMatch = false;
+let displayResults = false;
+
 let openBookButton;
 let currentWordInQuote = 0;
 
@@ -28,7 +31,7 @@ let combatFieldSize = {
 let enemyObj,
   inputField,
   currentLetter,
-  lastLearned,
+  lastLearned = "",
   introduced = false,
   introductionText;
 
@@ -74,6 +77,7 @@ function dropLetter() {
     b = letters.filter((a) => !a.known);
     lastLearned = b[Math.floor(Math.random() * b.length)];
     lastLearned.known = true;
+    localStorage.setItem("lastLearned", JSON.stringify(lastLearned.meaning));
   }
   currentLetterPos = letters.filter((a) => a.known);
   currentLetter =
@@ -120,14 +124,17 @@ function enterLetter() {
         b = letters.filter((a) => !a.known);
         lastLearned = b[Math.floor(Math.random() * b.length)];
         lastLearned.known = true;
+        localStorage.setItem("lastLearned", JSON.stringify(lastLearned.meaning));
         introduced = false;
       }
     }
   } else {
-    if (currentLetter.meaning == lastLearned.meaning) {
-      correctStreak = 0;
-    }
     mainChar.hp--;
+    try {
+      if (currentLetter.meaning == lastLearned.meaning) {
+        correctStreak = 0;
+      }
+    } catch {}
   }
   if (enemyObj.hp <= 0 || mainChar.hp <= 0) {
     enemyMusic.pause();
@@ -162,6 +169,16 @@ function enterLetter() {
       cursedTreesLeft = 1;
     }
     mainChar.hp = 5;
+
+    if (enemyObj.hp <= 0) {
+      wonMatch = true;
+    } else {
+      wonMatch = false;
+    }
+    displayResults = true;
+    setTimeout(() => {
+      displayResults = false;
+    }, 1000);
   }
   if (enemyObj.type == "doraSized") {
     dropLetter();
@@ -178,6 +195,15 @@ function drawCombat() {
     w: (width * 6) / 8,
     h: (height * 6) / 8,
   };
+
+  if (displayResults) {
+    if (wonMatch) {
+      image(tiles["won"], width / 2 - 50, height / 2 - 25);
+    } else {
+      image(tiles["lost"], width / 2 - 50, height / 2 - 25);
+    }
+  }
+
   if (currentState != "combat") return;
   //backgrounds
   rect(
@@ -261,18 +287,19 @@ function drawCombat() {
   }
 
   let divs = document.getElementsByTagName("div");
-  if (
-    introduced ||
-    currentLetter.meaning != lastLearned.meaning ||
-    currentState == "map"
-  ) {
-    for (let i = 0; i < divs.length; i++) {
-      try {
-        divs[i].remove();
-      } catch {}
-    }
-  }
   try {
+    if (
+      introduced ||
+      currentLetter.meaning != lastLearned.meaning ||
+      currentState == "map"
+    ) {
+      for (let i = 0; i < divs.length; i++) {
+        try {
+          divs[i].remove();
+        } catch {}
+      }
+    }
+
     introductionText.position(
       window.innerWidth / 2 - 100,
       combatFieldSize.y + 10

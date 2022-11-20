@@ -114,6 +114,63 @@ let sacredTrees = [
     "Ja sam grof Nikola IV. Zrinski, zvan Nikola Šubić Zrinski. Branio sam Siget od Osmanlija, gdje sam na kraju i izgubio život.",
     `${loadPrefix}/CharDesign/nikolaSubicZrinski.png`
   ),
+
+  new spirit(
+    29,
+    79,
+    "Plomisnki natpis",
+    "Plominski je natpis spomenik s reljefno uklesanim likom ilirsko-rimskoga božanstva Silvana, zaštitnika šuma i životinja. Natpis na kamenu uklesan je oblom glagoljicom iz 11. stoljeća",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    61,
+    3,
+    "Petrisov zbornik",
+    "Petrisov je zbornik najbogatije vrelo hrvatskih srednjovjekovnih tekstova. Sadrži 162 članka u rukopisu koji su vezani za opće znanje, kanonske propise, duhovne pripovijesti, romane itd.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    11,
+    19,
+    "Bašćanska ploča",
+    "Nekada je bila dijelom pluteja, pregradne ploče u benediktinskoj crkvi sv. Lucije u Jurandvoru. Govori o darivanju zemlje koju je hrvatski kralj Zvonimir dao redovnicima, koji su zatim sagradili crkvu. Danas je jedan od najvrjednijih spomenika hrvatske pismenosti koji se čuva u prostorima HAZU-a.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    63,
+    34,
+    "Bečki listići",
+    "Bečki listići najstariji su spomenik hrvatske liturgijske književnosti na hrvatskostaroslavenskom jeziku i najstariji svjedok češko-hrvatskih kulturnih veza.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    6,
+    45,
+    "Misal po zakonu rimskoga dvora",
+    "Misal po zakonu rimskoga dvora hrvatski je prvotisak na glagoljici i hrvatskom crkvenoslavenskom jeziku. Govori o društvenoj, gospodarskoj i kulturnoj snazi Hrvata u drugoj polovici 15.st. Tiskan je na papiru i pergameni. Danas je sačuvano 12 nepotpunih primjeraka, od toga se dva nalaze u Nacionalnoj i sveučilišnoj knjižnici u Zagrebu, jedan u Dominikanskom samostanu na otoku Braču.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    56,
+    66,
+    "Inkanabula",
+    "Knjige tiskane prije 1500., kada je tiskarstvo bilo u povojima. Važne su za europsku kulturu jer su predlošci za kasnije tiskane knjige.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    47,
+    93,
+    "Inicijal",
+    "Početno je veliko slovo. Vidimo ga istaknuta na početku knjige, poglavlja. Mogu biti rukopisni i tiskani. Obično ima pojačano tijelo i često je ukrašeno dodatnim crtežom i bojama.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
+  new spirit(
+    65,
+    95,
+    "Paleografija",
+    "Pomoćna je povijesna znanost koja se bavi proučavanjem podrijetla, razvoja i širenja antičkih i srednjovjekovnih pisama u knjigama, na kamenim natpisima i na drugim materijalima.",
+    `${loadPrefix}/CharDesign/npis.png`
+  ),
 ];
 
 function sacredTreeStart(x, y) {
@@ -141,6 +198,8 @@ function preload() {
   tiles["wd2"] = loadImage(`${loadPrefix}/tiles/waterDE2.png`);
   tiles["wd3"] = loadImage(`${loadPrefix}/tiles/waterDE3.png`);
   tiles["wd4"] = loadImage(`${loadPrefix}/tiles/waterDE4.png`);
+  tiles["n"] = loadImage(`${loadPrefix}/tiles/napis.png`);
+  tiles["b"] = loadImage(`${loadPrefix}/tiles/bush.png`)
   mainChar.idle = loadImage(`${loadPrefix}/CharDesign/playerIdle.png`);
   mainChar.moving = [
     loadImage(`${loadPrefix}/CharDesign/playerMove0000.png`),
@@ -150,6 +209,7 @@ function preload() {
   tiles["bg"] = loadImage(`${loadPrefix}/tiles/background.png`);
   tiles["enemy"] = loadImage(`${loadPrefix}/CharDesign/enemy.png`);
   tiles["heart"] = loadImage(`${loadPrefix}/tiles/heart.png`);
+  tiles["controls"] = loadImage(`${loadPrefix}/CharDesign/Controls.png`);
   for (let i = 0; i < letters.length; i++) {
     letters[i].src = loadImage(letters[i].src);
   }
@@ -157,6 +217,23 @@ function preload() {
     sacredTrees[i].src = loadImage(sacredTrees[i].src);
   }
   tiles["title"] = loadImage(`${loadPrefix}/tiles/title.png`);
+  tiles["won"] = loadImage(`${loadPrefix}/tiles/win.png`);
+  tiles["lost"] = loadImage(`${loadPrefix}/tiles/lost.png`);
+
+  tiles["ps1"] = loadImage(`${loadPrefix}/tiles/pathSE1.png`);
+  tiles["ps2"] = loadImage(`${loadPrefix}/tiles/pathSE2.png`);
+  tiles["ps3"] = loadImage(`${loadPrefix}/tiles/pathSE3.png`);
+  tiles["ps4"] = loadImage(`${loadPrefix}/tiles/pathSE4.png`);
+
+  tiles["pel1"] = loadImage(`${loadPrefix}/tiles/pathEL1.png`);
+  tiles["pel2"] = loadImage(`${loadPrefix}/tiles/pathEL2.png`);
+  tiles["pel3"] = loadImage(`${loadPrefix}/tiles/pathEL3.png`);
+  tiles["pel4"] = loadImage(`${loadPrefix}/tiles/pathEL4.png`);
+
+  tiles["per1"] = loadImage(`${loadPrefix}/tiles/pathER1.png`);
+  tiles["per2"] = loadImage(`${loadPrefix}/tiles/pathER2.png`);
+  tiles["per3"] = loadImage(`${loadPrefix}/tiles/pathER3.png`);
+  tiles["per4"] = loadImage(`${loadPrefix}/tiles/pathER4.png`);
 
   loadDick();
 }

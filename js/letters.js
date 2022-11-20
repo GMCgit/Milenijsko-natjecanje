@@ -43,7 +43,7 @@ class word {
 }
 
 let loadPrefix = "..";
-loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
+//loadPrefix = "https://gmcgit.github.io/Milenijsko-natjecanje";
 let letters = [
   new letter("a", "az", `${loadPrefix}/letters/a.png`),
   new letter("b", "buki", `${loadPrefix}/letters/b.png`),
@@ -95,6 +95,20 @@ function convertBackToLetterArray() {
         letters[j].known = converted[i].k;
       }
     }
+  }
+}
+
+let muted = false;
+
+function muteVolume(){
+  muted = !muted;
+  if(!muted){
+    backgroundMusic.volume = 0.05;
+    enemyMusic.volume = 0.1;
+  }
+  else{
+    backgroundMusic.volume = 0;
+    enemyMusic.volume = 0;
   }
 }
 

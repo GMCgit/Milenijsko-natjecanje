@@ -61,20 +61,20 @@ function drawDict() {
 }
 
 function loadDick() {
-  dictPage[0] = loadImage(`${loadPrefix}/dictionary/1.png`);
-  dictPage[1] = loadImage(`${loadPrefix}/dictionary/2.png`);
-  dictPage[2] = loadImage(`${loadPrefix}/dictionary/3.png`);
-  dictPage[3] = loadImage(`${loadPrefix}/dictionary/4.png`);
-  dictPage[4] = loadImage(`${loadPrefix}/dictionary/5.png`);
-  dictPage[5] = loadImage(`${loadPrefix}/dictionary/6.png`);
-  dictPage[6] = loadImage(`${loadPrefix}/dictionary/7.png`);
-  dictPage[7] = loadImage(`${loadPrefix}/dictionary/8.png`);
-  dictPage[8] = loadImage(`${loadPrefix}/dictionary/9.png`);
-  dictPage[9] = loadImage(`${loadPrefix}/dictionary/10.png`);
-  dictPage[10] = loadImage(`${loadPrefix}/dictionary/11.png`);
-  dictPage[11] = loadImage(`${loadPrefix}/dictionary/12.png`);
-  dictPage[12] = loadImage(`${loadPrefix}/dictionary/13.png`);
-  dictPage[13] = loadImage(`${loadPrefix}/dictionary/14.png`);
+  dictPage[0] = loadImage(`${loadPrefix}/dictionary/Dict1.png`);
+  dictPage[1] = loadImage(`${loadPrefix}/dictionary/Dict2.png`);
+  dictPage[2] = loadImage(`${loadPrefix}/dictionary/Dict3.png`);
+  dictPage[3] = loadImage(`${loadPrefix}/dictionary/Dict4.png`);
+  dictPage[4] = loadImage(`${loadPrefix}/dictionary/Dict5.png`);
+  dictPage[5] = loadImage(`${loadPrefix}/dictionary/Dict6.png`);
+  dictPage[6] = loadImage(`${loadPrefix}/dictionary/Dict7.png`);
+  dictPage[7] = loadImage(`${loadPrefix}/dictionary/Dict8.png`);
+  dictPage[8] = loadImage(`${loadPrefix}/dictionary/Dict9.png`);
+  dictPage[9] = loadImage(`${loadPrefix}/dictionary/Dict10.png`);
+  dictPage[10] = loadImage(`${loadPrefix}/dictionary/Dict11.png`);
+  dictPage[11] = loadImage(`${loadPrefix}/dictionary/Dict12.png`);
+  dictPage[12] = loadImage(`${loadPrefix}/dictionary/Dict13.png`);
+  dictPage[13] = loadImage(`${loadPrefix}/dictionary/Dict14.png`);
   dictPage[14] = loadImage(`${loadPrefix}/dictionary/Mist1.png`);
   dictPage[15] = loadImage(`${loadPrefix}/dictionary/Mist2.png`);
 }
