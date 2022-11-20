@@ -10,6 +10,7 @@ let currentFrameMove = 0;
 let encCooldown = [];
 let lastX, lastY;
 let showInstructions = false;
+let enteringInstructions = false;
 
 main();
 
@@ -38,12 +39,12 @@ function main(currentTime) {
 
 //Movement register
 addEventListener("click", (e) => {
-  if (showInstructions) {
+  if (showInstructions && !enteringInstructions) {
     showInstructions = false;
   }
 });
 addEventListener("keydown", (e) => {
-  if (showInstructions) {
+  if (showInstructions && !enteringInstructions) {
     showInstructions = false;
   }
 
@@ -242,6 +243,7 @@ function windowResized() {
 }
 
 function draw() {
+  enteringInstructions = false;
   background(220);
   let posX = 0;
   let posY = 0;
@@ -432,6 +434,7 @@ function createBookButton() {
 }
 
 function loadInstructions() {
+  enteringInstructions = true;
   showInstructions = true;
 }
 
