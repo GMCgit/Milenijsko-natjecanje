@@ -99,16 +99,18 @@ function convertBackToLetterArray() {
 }
 
 let muted = false;
+let muteButton;
 
-function muteVolume(){
+function muteVolume() {
   muted = !muted;
-  if(!muted){
+  if (!muted) {
     backgroundMusic.volume = 0.05;
     enemyMusic.volume = 0.1;
-  }
-  else{
+    muteButton.html(`<image src="${loadPrefix}/tiles/volumeOn.png"></image>`);
+  } else {
     backgroundMusic.volume = 0;
     enemyMusic.volume = 0;
+    muteButton.html(`<image src="${loadPrefix}/tiles/volumeOff.png"></image>`);
   }
 }
 

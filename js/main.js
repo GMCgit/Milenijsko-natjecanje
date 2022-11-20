@@ -10,7 +10,6 @@ let currentFrameMove = 0;
 let encCooldown = [];
 let lastX, lastY;
 let showInstructions = false;
-let muteButton;
 
 main();
 
@@ -60,10 +59,17 @@ addEventListener("keydown", (e) => {
     keyMap["w"] = false;
 
     openBookButton.remove();
-    muteButton = createElement(
-      "button",
-      `<image src="${loadPrefix}/tiles/book.png"></image>`
-    );
+    if (!muted) {
+      muteButton = createElement(
+        "button",
+        `<image src="${loadPrefix}/tiles/volumeOn.png"></image>`
+      );
+    } else {
+      muteButton = createElement(
+        "button",
+        `<image src="${loadPrefix}/tiles/volumeOff.png"></image>`
+      );
+    }
     muteButton.addClass("bookButton");
     muteButton.mousePressed(muteVolume);
     muteButton.position(window.innerWidth / 2 + width / 2 - 55, 10);
@@ -211,7 +217,7 @@ function setup() {
 
   muteButton = createElement(
     "button",
-    `<image src="${loadPrefix}/tiles/book.png"></image>`
+    `<image src="${loadPrefix}/tiles/volumeOn.png"></image>`
   );
   muteButton.addClass("bookButton");
   muteButton.mousePressed(muteVolume);
