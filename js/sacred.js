@@ -79,7 +79,7 @@ let sacredTrees = [
     42,
     67,
     "Petar Zrinski",
-    "Ja sam Petar Zrinski. Nastavio sam borbu za prava Hrvatske koju je započeo moj brat, a kada je Varšavskim mirom Beč Osmanlijama dao osvojena područja Hrvatske pokušao sam učiniti sve da bih smanjio centralizam cara. 1671. išao sam u Bečko Novo Mjesto na poziv cara, gdje smo Fran Krsto Frankopan i ja bili pogubljeni, čime su na neko vrijeme propale dvije najvažnije hrvatske loze.",
+    "Ja sam Petar Zrinski. Nastavio sam borbu za prava Hrvatske koju je započeo moj brat, a kada je Varšavskim mirom Beč Osmanlijama dao osvojena područja Hrvatske, pokušao sam učiniti sve da bih smanjio centralizam cara. 1671. išao sam u Bečko Novo Mjesto na poziv cara, gdje smo Fran Krsto Frankopan i ja bili pogubljeni, čime su na neko vrijeme propale dvije najvažnije hrvatske loze.",
     `${loadPrefix}/CharDesign/petarZrinski.png`
   ),
 
@@ -87,7 +87,7 @@ let sacredTrees = [
     81,
     75,
     "Ćiril",
-    "Ja sam Ćiril, rođen sam u Solunu gdje sam i odrastao. Mene i mog brata je poslao knez Rastislav da propovijedamo kršćansku vjeru na slavenskom jeziku. Ja sam sastavio glagoljicu, prvo slavensko pismo i preveo sam najvažnije crkvene knjige na jezik makedonskih Slavena.",
+    "Ja sam Ćiril, rođen sam u Solunu gdje sam i odrastao. Mene i mog brata poslao je knez Rastislav da propovijedamo kršćansku vjeru na slavenskom jeziku. Sastavio sam glagoljicu, prvo slavensko pismo i preveo sam najvažnije crkvene knjige na jezik makedonskih Slavena.",
     `${loadPrefix}/CharDesign/ciril.png`
   ),
 
@@ -95,7 +95,7 @@ let sacredTrees = [
     69,
     17,
     "Grgur Ninski",
-    "Ja sam Grgur Ninski. Vodio sam Ninsku biskupiju i sa kraljem Tomislavom borio sam se za crkvu na slavenskom jeziku i pismu. Nažalost, brzo je svećenicima bilo zabranjeno voditi mise na slavenskom jeziku.",
+    "Ja sam Grgur Ninski. Vodio sam Ninsku biskupiju i s kraljem Tomislavom borio sam se za crkvu na slavenskom jeziku i pismu. Nažalost, brzo je svećenicima bilo zabranjeno voditi mise na slavenskom jeziku.",
     `${loadPrefix}/CharDesign/grgurNinski.png`
   ),
 
@@ -103,7 +103,7 @@ let sacredTrees = [
     25,
     49,
     "Kralj Zvonimir",
-    "Ja sam Zvonimir, kralj Hrvata. Za vrijeme moje vladavine Hrvatska je bila u miru i blagostanju, ali moja smrt je izazvala krvoproliće. Gradio sam crkve i samostane, u jednom od njih našli su i  Bašćansku ploču, izuzetno bitan izvor za povijest hrvatskog naroda i pisma.",
+    "Ja sam Zvonimir, kralj Hrvata. Za vrijeme moje vladavine Hrvatska je bila u miru i blagostanju, ali moja je smrt izazvala krvoproliće. Gradio sam crkve i samostane, u jednom od njih pronašli su i Bašćansku ploču, izuzetno bitan izvor za povijest hrvatskog naroda i pisma.",
     `${loadPrefix}/CharDesign/kraljZvonimir.png`
   ),
 
@@ -118,7 +118,7 @@ let sacredTrees = [
   new spirit(
     29,
     79,
-    "Plomisnki natpis",
+    "Plominski natpis",
     "Plominski je natpis spomenik s reljefno uklesanim likom ilirsko-rimskoga božanstva Silvana, zaštitnika šuma i životinja. Natpis na kamenu uklesan je oblom glagoljicom iz 11. stoljeća",
     `${loadPrefix}/CharDesign/npis.png`
   ),
